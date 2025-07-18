@@ -33,7 +33,7 @@
 
 ## What is Amazon EC2?
 
-- **Amazon Elastic Compute Cloud (EC2)** is a scalable compute service that allows users to rent virtual servers in the cloud.
+- **Amazon Elastic Compute Cloud (EC2)** is a scalable compute service that allows users to rent virtual servers in the cloud. 
 - It provides flexibility to scale compute resources up or down based on demand, offering a cost-effective solution for applications with variable workloads.
 - Key features include:
   - **On-Demand Instances**: Pay for compute capacity by the hour or second, with no long-term commitments.
@@ -91,7 +91,6 @@ Amazon EC2 offers a variety of instance types, each designed to meet specific ap
   - Machine learning inference
 
 | **Instance Type** | **vCPUs** | **Memory (GiB)** | **Network Performance** | **Storage** |
-| ----------------- | --------- | ---------------- | ----------------------- | ----------- |
 | **c5.large**      | 2         | 4                | Up to 10 Gigabit        | EBS only    |
 | **c5.xlarge**     | 4         | 8                | Up to 10 Gigabit        | EBS only    |
 | **c5.2xlarge**    | 8         | 16               | Up to 10 Gigabit        | EBS only    |
