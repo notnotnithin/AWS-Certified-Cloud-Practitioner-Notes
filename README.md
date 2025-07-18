@@ -5,18 +5,6 @@
 
 ![Logo](./images/Cloud-Practitioner.png)
 
-## Buy This AWS Cloud Practitioner Study Notes And Practice Exams PDF
-
-![Ebook_Cover](./images/Ebook_Cover.png)
-
-**[Sample PDF](./images/AWS-Cloud-Practitioner-Study-Notes-Sample.pdf)** &nbsp; &nbsp; &nbsp;
-**[Buy Study Notes PDF](https://ko-fi.com/s/02467fa90c)** &nbsp; &nbsp; &nbsp;
-**[Buy Practice Exams PDF](https://ko-fi.com/s/26525f2067)**
-
-Purchase a PDF on Kindle and adjust your region settings for the most favorable price based on your location: **[Kindle Edition](https://a.co/d/bvPmN94) (For kindle unlimited users)**
-
-Purchase a PDF on **Leanpub**: [AWS Cloud Practitioner Study Notes (CLF-C02) PDF](https://leanpub.com/aws-cloud-practitioner-study-notes)
-
 Each Section contains a number of units. **Below Table Link** containing information about each sections in detail.
 
 ## Table of contents
@@ -65,22 +53,3 @@ Each Section contains a number of units. **Below Table Link** containing informa
 ## Practice Exams ( dumps )
 
 - **[Practice Exam List](https://kananinirav.com/practice-exam/exams.html)**
-
-## Other AWS And Azure Certification Notes
-
-- [Microsoft Azure Fundamentals (AZ-900)](https://certification.kananinirav.com/az-900-microsoft-azure-fundamentals/)
-- [Useful Cheat Sheet For Developers](https://certification.kananinirav.com/cheat-sheets/)
-
-### If you find the content of this website interesting and helpful, use the “Buy me a Coffee” link below to buy me a coffee
-
-<a href='https://ko-fi.com/I2I51B7WW2' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
-
-![gif](https://media.giphy.com/media/gTURHJs4e2Ies/giphy.gif)
-
-<div class="hide-star">
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=kananinirav/AWS-Certified-Cloud-Practitioner-Notes&type=Date)](https://star-history.com/#kananinirav/AWS-Certified-Cloud-Practitioner-Notes&Date)
-
-</div>
