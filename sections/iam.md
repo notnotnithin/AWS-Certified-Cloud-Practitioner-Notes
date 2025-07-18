@@ -330,13 +330,17 @@ print('S3 Buckets:', [bucket['Name'] for bucket in response['Buckets']])
 - **AWS Responsibility**:
   - Protect the infrastructure that runs AWS services.
   - Provide IAM service availability.
+  - Configuration and vulnerability analysis.
+  - Compliance validation.
   - Offer managed policies for common scenarios.
 
 - **Customer Responsibility**:
-  - Manage IAM users, groups, and roles.
+  - Manage IAM users, groups, role, policies management and monitoring.
   - Configure IAM policies correctly and apply the principle of least privilege.
   - Secure IAM credentials and enable MFA.
+  - Rotate all your keys often.
   - Regularly audit permissions using tools like IAM Credential Report and Access Advisor.
+  - Analyze access patterns and review permissions.
 
 | **AWS Responsibility**                                    | **Customer Responsibility**                                                            |
 |-----------------------------------------------------------|---------------------------------------------------------------------------------------|
@@ -347,13 +351,13 @@ print('S3 Buckets:', [bucket['Name'] for bucket in response['Buckets']])
 ## IAM Section – Summary
 
 - **Users**: Mapped to a physical user, has a username and password for AWS Management Console access.
-- **Groups**: Contains users and allows applying common permissions to multiple users.
+- **Groups**: Contains users only and allows applying common permissions to multiple users.
 - **Policies**: JSON document that defines permissions for users, groups, or roles.
 - **Roles**: Assign to AWS services (e.g., EC2, Lambda) for accessing other resources without credentials.
 - **Permissions**: Allow or deny actions on AWS resources, defined using policies.
-- **MFA**: Multi-Factor Authentication for an additional layer of security beyond username and password.
+- **Security**: Multi-Factor Authentication for an additional layer of security beyond username and password.
 - **Password Policy**: Enforce password complexity, rotation, and reuse rules for IAM users.
 - **AWS CLI**: Command-line tool to interact with AWS services and automate tasks.
 - **AWS SDK**: Use programming languages (e.g., Python, JavaScript) to manage AWS services programmatically.
-- **Access Keys**: Key pairs used to authenticate when accessing AWS using the CLI or SDK.
+- **Access Keys**: Key pairs used to authenticate when accessing AWS using the **CLI** or **SDK**.
 - **Audit Tools**: IAM Credential Report lists user credentials; Access Advisor shows service permissions usage.
