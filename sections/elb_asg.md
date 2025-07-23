@@ -11,7 +11,7 @@
     - [Why Use a Load Balancer?](#why-use-a-load-balancer)
     - [Why Use an Elastic Load Balancer?](#why-use-an-elastic-load-balancer)
       - [Types of ELB](#types-of-elb)
-  - [What’s an Auto Scaling Group?](#whats-an-auto-scaling-group)
+  - [What's an Auto Scaling Group?](#whats-an-auto-scaling-group)
     - [Auto Scaling Group in AWS](#auto-scaling-group-in-aws)
     - [Auto Sclaing Group in AWS with Load Balancer](#auto-sclaing-group-in-aws-with-load-balancer)
     - [Auto Scaling Group Scaling Strategies](#auto-scaling-group-scaling-strategies)
@@ -21,7 +21,7 @@
 
 - **Scalability**: Ability of a system to handle an increase in load by adapting to the demand.
 - **High Availability**: Ensures a system is operational and accessible for a high percentage of time, often achieved by reducing the impact of failures.
-- There are two kinds of scalability:
+- There are **two kinds** of scalability:
   - Vertical Scalability
   - Horizontal Scalability (= elasticity)
 - **Scalability is linked but different to High Availability**
@@ -43,9 +43,9 @@
 
 ## High Availability
 
-- High Availability usually goes hand in hand with horizontal scaling
-- High availability means running your application / system in at least 2 Availability Zones
-- The goal of high availability is to survive a data center loss (disaster)
+- High Availability usually goes hand in hand with Horizontal Scaling
+- High Availability means running your application / system in at least 2 Availability Zones
+- The goal of High Availability is to survive a data center loss (disaster)
 
 ## High Availability & Scalability for EC2
 
@@ -111,7 +111,7 @@
 
 4. **Classic Load Balancer**: (retired in 2023) – Layer 4 & 7. This was replaced by ALB and NLB.
 
-## What’s an Auto Scaling Group?
+## What's an Auto Scaling Group?
 
 - In real-life, the load on your websites and application can change
 - In the cloud, you can create and get rid of servers very quickly
