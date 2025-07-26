@@ -3,15 +3,16 @@
 - [Deploying and Managing Infrastructure at Scale](#deploying-and-managing-infrastructure-at-scale)
   - [What is CloudFormation?](#what-is-cloudformation)
     - [Benefits of AWS CloudFormation](#benefits-of-aws-cloudformation)
-    - [CloudFormation Stack Designer](#cloudformation-stack-designer)
+    - [CloudFormation + Infrastructure Composer](#cloudformation--infrastructure-composer)
   - [AWS Cloud Development Kit (CDK)](#aws-cloud-development-kit-cdk)
     - [Example of AWS CDK (Python)](#example-of-aws-cdk-python)
-  - [Developer problems on AWS](#developer-problems-on-aws)
   - [Typical architecture: Web App 3-tier](#typical-architecture-web-app-3-tier)
+  - [Developer problems on AWS](#developer-problems-on-aws)
   - [AWS Elastic Beanstalk Overview](#aws-elastic-beanstalk-overview)
     - [Elastic Beanstalk vs CloudFormation](#elastic-beanstalk-vs-cloudformation)
     - [Elastic Beanstalk - Health Monitoring](#elastic-beanstalk---health-monitoring)
   - [AWS CodeDeploy](#aws-codedeploy)
+  - [AWS CodeCommit - Important - Deprecation](#aws-codecommit---important---deprecation)
   - [AWS CodeCommit](#aws-codecommit)
   - [AWS CodeBuild](#aws-codebuild)
   - [AWS CodePipeline](#aws-codepipeline)
@@ -19,8 +20,9 @@
   - [AWS CodeStar](#aws-codestar)
   - [AWS Cloud9](#aws-cloud9)
   - [AWS Systems Manager (SSM)](#aws-systems-manager-ssm)
-    - [How Systems Manager works](#how-systems-manager-works)
-    - [Systems Manager - SSM Session Manager](#systems-manager---ssm-session-manager)
+    - [How AWS Systems Manager works](#how-aws-systems-manager-works)
+    - [AWS Systems Manager - SSM Session Manager](#aws-systems-manager---ssm-session-manager)
+    - [AWS Systems Manager Parameter Store](#aws-systems-manager-parameter-store)
   - [AWS OpsWorks](#aws-opsworks)
     - [OpsWorks Architecture](#opsworks-architecture)
   - [Deployment - Summary](#deployment---summary)
@@ -56,18 +58,19 @@
   - Everything we’ll see in this course is supported
   - You can use “custom resources” for resources that are not supported
 
-### CloudFormation Stack Designer
+### CloudFormation + Infrastructure Composer
 
+- You can visualize the CloudFormation template using the Infrastructure Composer Service
 - Example: WordPress CloudFormation Stack
 - We can see all the resources
-- We can see the relations between the components
+- We can see the relations between the components and how they are linked together which is very handy when you want to understand your architecture diagrams
 
 ## AWS Cloud Development Kit (CDK)
 
 - Define your cloud infrastructure using a familiar language:
   - JavaScript/TypeScript, Python, Java, and .NET
 - The code is “compiled” into a CloudFormation template (JSON/YAML)
-- You can therefore deploy infrastructure and application runtime code together
+- **You can therefore deploy infrastructure and application runtime code together**
   - Great for Lambda functions
   - Great for Docker containers in ECS / EKS
 
@@ -105,6 +108,10 @@ MyS3BucketStack(app, 'MyS3BucketStack')
 app.synth()
 ```
 
+## Typical architecture: Web App 3-tier
+
+![Web App 3-tier](../images/web_architecture.png)
+
 ## Developer problems on AWS
 
 - Managing infrastructure
@@ -115,27 +122,23 @@ app.synth()
 - All the developers want is for their code to run!
 - Possibly, consistently across different applications and environments
 
-## Typical architecture: Web App 3-tier
-
-![Web App 3-tier](../images/web_architecture.png)
-
 ## AWS Elastic Beanstalk Overview
 
 - Elastic Beanstalk is a developer centric view of deploying an application on AWS
-- It uses all the component’s we’ve seen before: EC2, ASG, ELB, RDS, etc…
+- It uses all the component’s we’ve seen before: EC2, ASG, ELB, RDS, etc...
 - But it’s all in one view that’s easy to make sense of!
-- We still have full control over the configuration
-- Beanstalk = Platform as a Service (PaaS)
+- We still have full control over the configuration of all the components, but it is all within Beanstalk
+- **Beanstalk = Platform as a Service (PaaS)** because we just worry about our code
 - Beanstalk is free but you pay for the underlying instances
 - Managed service
-  - Instance configuration / OS is handled by Beanstalk
+  - EC2 Instance configuration / OS is handled by Beanstalk
   - Deployment strategy is configurable but performed by Elastic Beanstalk
-  - Capacity provisioning
-  - Load balancing & auto-scaling
-- Application health-monitoring & responsiveness
-- Just the application code is the responsibility of the developer
+  - Capacity provisioning are done by beanstalk
+  - Load balancing & auto-scaling are done by beanstalk
+  - Application health-monitoring & responsiveness
+- **Just the application code is the responsibility of the developer**
 - Three architecture models:
-  - Single Instance deployment: good for dev
+  - Single Instance deployment: good for development environment
   - LB + ASG: great for production or pre-production web applications
   - ASG only: great for non-web apps in production (workers, etc..)
 
@@ -170,36 +173,49 @@ AWS Elastic Beanstalk uses AWS CloudFormation underneath for managing the infras
 
 ### Elastic Beanstalk - Health Monitoring
 
-- Health agent pushes metrics to CloudWatch
+- Beanstalk has a full monitoring suite available in the service itself
+- Health agents are available inside each EC2 instance within Beanstalk and that is going to push metrics to CloudWatch
 - Checks for app health, publishes health events
 
 ## AWS CodeDeploy
 
-- We want to deploy our application automatically
-- Works with EC2 Instances
-- Works with On-Premises Servers
-- Hybrid service
-- Servers / Instances must be provisioned and configured ahead of time with the CodeDeploy Agent
+- We want to deploy our application **automatically**
+- Difference from Beanstalk is that it is a bit more permissive and it does not need a Beanstalk or CloudFormation
+- If your application is in version 1 and you want to upgrade it to version 2, CodeDeploy will find us a way to do this 
+- CodeDeploy works with two things: 
+  - EC2 Instances - where many EC2 instances want to upgrade application from version 1 to 2
+  - On-Premises Servers - again it helps to upgrade application from version 1 to 2
+- Hybrid service - as it works for both On-Premises, and for EC2 instances
+- It allows you to work with any kind of servers. However, the servers / instances must be provisioned and configured ahead of time. 
+- You must configure them to install the CodeDeploy Agent which assist you to do these upgrades
+- Basically, CodeDeploy allows people to do the transition from On-Premises to AWS by using the same way to deploy the application either with your On-Premises Servers, or your EC2 instances with the same single interface
+
+## AWS CodeCommit - Important - Deprecation
+
+- On July 25th, 2024, AWS abruptly discontinues CodeCommit
+- New customers cannot use the service
+- AWS recommends to migrate to an external Git solution 
 
 ## AWS CodeCommit
 
 - Before pushing the application code to servers, it needs to be stored somewhere
-- Developers usually store code in a repository, using the Git technology
-- A famous public offering is GitHub, AWS’ competing product is CodeCommit
+- Developers usually store **code in a repository, using the Git technology**
+- A famous public offering is GitHub, AWS’ competing product is **CodeCommit**
 - CodeCommit:
-  - Source-control service that hosts Git-based repositories
-  - Makes it easy to collaborate with others on code
-  - The code changes are automatically versioned
+  - Source-control service that **hosts Git-based repositories**
+  - Makes it easy to **collaborate with others on code**
+  - The code changes are automatically **versioned**
 - Benefits:
-  - Fully managed
-  - Scalable & highly available
-  - Private, Secured, Integrated with AWS
+  - Fully managed code repository
+  - Scalable & highly available, but also lives within your AWS accounts
+  - Private, Secured, Integrated with all AWS services
 
 ## AWS CodeBuild
 
 - Code building service in the cloud (name is obvious)
-- Compiles source code, run tests, and produces packages that are ready to be deployed (by CodeDeploy for example)
-- Benefits:
+- **Compiles source code, run tests, and the output of which is going to produce packages that are ready to be deployed (by CodeDeploy for example)**
+- CodeBuild is going to retrieve this code from CodeCommit, run some scripts that you have defined, build your code to produce some ready-to-deploy artifacts
+- **Benefits:**
   - Fully managed, serverless
   - Continuously scalable & highly available
   - Secure
@@ -207,64 +223,77 @@ AWS Elastic Beanstalk uses AWS CloudFormation underneath for managing the infras
 
 ## AWS CodePipeline
 
-- Orchestrate the different steps to have the code automatically pushed to production
-- Code => Build => Test => Provision => Deploy
+- How do you know that CodeCommit and CodeBuild are connected? We connect them using **CodePipeline**
+- **A way to orchestrate the different steps to have the code automatically pushed to production**
+  - Code => Build => Test => Provision => Deploy
 - Basis for CICD (Continuous Integration & Continuous Delivery)
-- Benefits:
-  - Fully managed, compatible with CodeCommit, CodeBuild, CodeDeploy, Elastic Beanstalk, CloudFormation, GitHub, 3rd-party services (GitHub…) & custom plugins…
-  - Fast delivery & rapid updates
-
 - CodePipeline: orchestration layer
   - CodeCommit => CodeBuild => CodeDeploy => Elastic Beanstalk
+- **Benefits:**
+  - Fully managed, compatible with CodeCommit, CodeBuild, CodeDeploy, Elastic Beanstalk, CloudFormation, GitHub, other 3rd-party services (GitHub...) & custom plugins...
+  - Fast delivery & rapid updates
+- It is at the core of the CICD services within AWS
 
 ## AWS CodeArtifact
 
 - Software packages depend on each other to be built (also called code dependencies), and new ones are created
-- Storing and retrieving these dependencies is called artifact management
+- Storing and retrieving these dependencies is called **artifact management**
 - Traditionally you need to setup your own artifact management system
-- CodeArtifact is a secure, scalable, and cost-effective artifact management for software development
+- **CodeArtifact** is a secure, scalable, and cost-effective **artifact management** service for software development
 - Works with common dependency management tools such as Maven, Gradle, npm, yarn, twine, pip, and NuGet
-- Developers and CodeBuild can then retrieve dependencies straight from CodeArtifact
+- **Developers and CodeBuild can then retrieve dependencies straight from CodeArtifact**
+- That means once you push your code to CodeCommit, CodeBuild will build, then CodeBuild can also retrieve the dependencies directly from CodeArtifact
 
 ## AWS CodeStar
 
 - Unified UI to easily manage software development activities in one place
-- “Quick way” to get started to correctly set-up CodeCommit, CodePipeline, CodeBuild, CodeDeploy, Elastic Beanstalk, EC2, etc…
-- Can edit the code ”in-the-cloud” using AWS Cloud9
+- "Quick way" to get started to correctly set-up CodeCommit, CodePipeline, CodeBuild, CodeDeploy, Elastic Beanstalk, EC2, etc…
+- Can edit the code "in-the-cloud" using AWS Cloud9
 
 ## AWS Cloud9
 
 - AWS Cloud9 is a cloud IDE (Integrated Development Environment) for writing, running and debugging code
-- “Classic” IDE (like IntelliJ, Visual Studio Code…) are downloaded on a computer before being used
+- "Classic" IDE (like IntelliJ, Visual Studio Code...) are downloaded on a computer before being used
 - A cloud IDE can be used within a web browser, meaning you can work on your projects from your office, home, or anywhere with internet with no setup necessary
 - AWS Cloud9 also allows for code collaboration in real-time (pair programming)
 
 ## AWS Systems Manager (SSM)
 
-- Helps you manage your EC2 and On-Premises systems at scale
-- Another Hybrid AWS service
+- Helps you manage your fleet of **EC2 and On-Premises** systems at scale
+- Yet again it is a way to manage both AWS and On-Premises systems. Therefore it is called a **Hybrid AWS service**
 - Get operational insights about the state of your infrastructure
 - Suite of 10+ products
 - Most important features are:
-  - Patching automation for enhanced compliance
-  - Run commands across an entire fleet of servers
+  - **Patching automation of all your servers and instances for enhanced compliance**
+  - **Run commands across an entire fleet of servers**
   - Store parameter configuration with the SSM Parameter Store
-- Works for both Windows and Linux OS
+- Works for both Windows, Linux, MacOS, and Raspberry Pi OS (Raspbian)
 
-### How Systems Manager works
+### How AWS Systems Manager works
 
-- We need to install the SSM agent onto the systems we control
-- Installed by default on Amazon Linux AMI & some Ubuntu AMI
-- If an instance can’t be controlled with SSM, it’s probably an issue with the SSM agent!
-- Thanks to the SSM agent, we can run commands, patch & configure our servers
+- We need to install the SSM agent onto the systems we control and that is a small program that will be running in the background
+- The agents are installed by default on Amazon Linux AMI & some Ubuntu AMI
+- If you look at your EC2 instances and on-premises virtual machines, we first have to install the **SSM agent** on all of these, and the SSM agent will be reporting back to the SSM service in AWS. 
+- As you can see, it is linked to both EC2 instances and On-Premises VM thus making it a hybrid service
+- If an instance can't be controlled with SSM, it's probably an issue with the SSM agent!
+- Thanks to the SSM agent installed on our servers, we can run commands, patch & configure our servers
 
-### Systems Manager - SSM Session Manager
+### AWS Systems Manager - SSM Session Manager
 
-- Allows you to start a secure shell on your EC2 and on-premises servers
-- No SSH access, bastion hosts, or SSH keys needed
-- No port 22 needed (better security)
+- Allows you to start a secure shell on your EC2 instances and on-premises servers without having an SSH access, or the need for bastion hosts, or SSH keys
+- That means the port 22 on your EC2 instances is going to be closed because there is going to be no need to do an SSH to establish a secure shell onto your EC2 instance. That means better security
+- How does that work?
+  - The EC2 instance has an SSM agent and this agent will be connected to the Session Manager Service and allow us to get the secure shell running. That means that our users can access the EC2 instance through the Session Manager Service and execute some commands on it
 - Supports Linux, macOS, and Windows
 - Send session log data to S3 or CloudWatch Logs
+
+### AWS Systems Manager Parameter Store
+
+- A way to store configurations and secrets securely on AWS
+- Numerous data like API Keys, passwords, configurations can centrally store the configurations of many of your applications in one place 
+- Serverless, scalable, durable, easy SDK
+- It is secure because you control access permissions to each parameter in the parameter store using IAM
+- Since your configurations and parameters can evolve over time, therefore you have version tracking & encryption (optional)
 
 ## AWS OpsWorks
 
@@ -284,7 +313,8 @@ AWS Elastic Beanstalk uses AWS CloudFormation underneath for managing the infras
 
 - CloudFormation: (AWS only)
   - Infrastructure as Code, works with almost all of AWS resources
-  - Repeat across Regions & Accounts
+  - Allows you to create templates, and these templates can be used to deploy infrastructure on AWS 
+  - These templates can be used across Regions & Accounts to make your infrastructure truly repeatable
 - Beanstalk: (AWS only)
   - Platform as a Service (PaaS), limited to certain programming languages or Docker
   - Deploy code consistently with a known architecture: ex, ALB + EC2 + RDS
@@ -302,4 +332,3 @@ AWS Elastic Beanstalk uses AWS CloudFormation underneath for managing the infras
 - CodeStar: Unified view for allowing developers to do CICD and code
 - Cloud9: Cloud IDE (Integrated Development Environment) with collab
 - AWS CDK: Define your cloud infrastructure using a programming language
-

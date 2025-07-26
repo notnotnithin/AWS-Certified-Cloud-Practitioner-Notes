@@ -54,6 +54,17 @@
 - Integrated with **ECS**, **EKS**, and **Fargate** for easy deployment.
 - This is where you store your Docker images so they can be run by ECS or Fargate
 
+## Amazon EKS
+
+- EKS = Elastic Kubernetes Service
+- Allows you to launch **managed Kubernetes clusters on AWS**
+- Kubernetes is an **open-source system** for management, deployment, and scaling of containerized apps (Docker)
+- Containers can be hosted on:
+  - EC2 instances
+  - Fargate (Serverless)
+- **Kubernetes is cloud-agnostic**
+(can be used in any cloud – Azure, GCP...)
+
 ## What’s Serverless?
 
 - No need to provision, scale, or manage servers.
@@ -63,7 +74,7 @@
 - They just deploy… functions !
 - Initially... Serverless == FaaS (Function as a Service)
 - Serverless was pioneered by AWS Lambda but now also includes anything that’s managed: “databases, messaging, storage, etc.”
-- Serverless does not mean there are no servers…
+- Serverless does not mean there are no servers...
 - it means you just don’t manage / provision / see them
 - Ideal for event-driven and stateless applications.
 
@@ -103,11 +114,15 @@
 - Ruby
 - Java
 - Go
-- .NET Core
-- custom runtime (via container images) (community supported, example Rust)
+- C# (.NET Core) / Powershell
+- Custom Runtime API (via container images) (community supported, example Rust)
 - Lambda Container Image
   - The container image must implement the Lambda Runtime API
-  - ECS / Fargate is preferred for running arbitrary Docker images
+  - ECS / Fargate is preferred for running arbitrary Docker images even though Lambda supports running some level of customized Docker images
+
+### Example: Serverless Thumbnail creation
+
+### Example: Serverless CRON job
 
 ### AWS Lambda Pricing: Example
 

@@ -8,10 +8,12 @@
   - [Databases \& Shared Responsibility on AWS](#databases--shared-responsibility-on-aws)
   - [AWS RDS Overview](#aws-rds-overview)
     - [Advantage over using RDS versus deploying DB on EC2](#advantage-over-using-rds-versus-deploying-db-on-ec2)
+  - [RDS Solution Architecture](#rds-solution-architecture)
+  - [Amazon Aurora](#amazon-aurora)
+  - [Amazon Aurora Serverless](#amazon-aurora-serverless)
     - [RDS Deployments](#rds-deployments)
     - [RDS Deployments: Read Replicas, Multi-AZ](#rds-deployments-read-replicas-multi-az)
     - [RDS Deployments: Multi-Region](#rds-deployments-multi-region)
-  - [Amazon Aurora](#amazon-aurora)
   - [Amazon ElastiCache Overview](#amazon-elasticache-overview)
   - [DynamoDB](#dynamodb)
     - [DynamoDB Accelerator (DAX)](#dynamodb-accelerator-dax)
@@ -32,10 +34,10 @@
 
 - Storing data on disk (EFS, EBS, EC2 Instance Store, S3) can have its limits
 - Sometimes, you want to store data in a database…
-- You can structure the data
-- You build indexes to efficiently query / search through the data
-- You define relationships between your datasets
-- Databases are optimized for a purpose and come with different features, shapes and constraint
+- You can **structure** the data
+- You build **indexes** to efficiently **query** / **search** through the data
+- You define **relationships** between your datasets
+- Databases are **optimized for a purpose** and come with different features, shapes and constraint
 - **Managed Databases**: AWS takes care of maintenance, backups, and security for databases.
 - **Benefits**: Reduced operational complexity, built-in high availability, disaster recovery, scalability, and enhanced security.
 - **Types**:
@@ -46,27 +48,30 @@
 
 ## Relational Databases (SQL)
 
+- Looks just like Excel spreadsheets, with links between them
+- Can use SQL language to perform queries / lookups
 - **Structured Data**: Stored in predefined schema tables, managed with SQL.
 - **Use Cases**: Transactional applications, financial systems.
 - **Examples**: MySQL, PostgreSQL, Oracle, SQL Server, MariaDB.
 
 ## NoSQL Databases
 
-- **Flexible Schema**: No predefined schema, designed for fast and scalable data storage.
+- NoSQL = non-SQL = non relational databases
+- NoSQL databases are built for a specific data models and have flexible schemas for building modern applications. The schema is basically the shape of the data
 - **Use Cases**: Real-time applications, IoT, mobile apps.
 - Benefits:
   - Flexibility: easy to evolve data model
-  - Scalability: designed to scale-out by using distributed clusters
+  - Scalability: designed to scale-out by using distributed clusters. For example, in relational databases, it is not easy to add servers to scale it, you have to do a vertical scaling, but with NoSQL databases, you can do horizontal scaling
   - High-performance: optimized for a specific data model
   - Highly functional: types optimized for the data model
-- **Examples**: DynamoDB, MongoDB (DocumentDB), Key-value, document, graph, in-memory, search databases
+- **Examples**: Key-value, document, graph, in-memory, search databases
 
 ### NoSQL data example: JSON
 
 - JSON is a common form of data that fits into a NoSQL model
-- Data can be nested
-- Fields can change over time
-- Support for new types: arrays, etc…
+- Data can be **nested**
+- Fields can **change** over time
+- Support for new types: **arrays**, etc…
 
 ```json
 {
@@ -87,6 +92,14 @@
 
 ## Databases & Shared Responsibility on AWS
 
+- AWS offers us to **manage** different databases
+- **Benefits include:**
+  - Quick to provision, High Availability, Vertical and Horizontal Scaling
+  - Automated Backup & Restore, Operations, Upgrades
+  - Operating System Patching is handled by AWS
+  - Monitoring, alerting are going to be integrated
+- Note: many database technologies could be run on EC2, but you must handle yourself the resiliency, backup, patching, high availability, fault tolerance, scaling. This is why using a managed databases is going to be a lifesaver
+
 | **AWS Responsibility**                      | **Customer Responsibility**                      |
 | ------------------------------------------- | ------------------------------------------------ |
 | Infrastructure management, backups, patches | Data security, encryption, access controls (IAM) |
@@ -94,23 +107,70 @@
 
 ## AWS RDS Overview
 
-- **RDS (Relational Database Service)**: Fully managed service for relational databases.
+- **RDS (Relational Database Service)**: 
+  - Fully managed service for relational databases.
   - It’s a managed DB service for DB use SQL as a query language.
-  - Supports **MySQL**, **PostgreSQL**, **MariaDB**, **Oracle**, **SQL Server**.
-  - Handles **backup**, **patching**, **high availability** (Multi-AZ), and **scaling**.
+  - It allows you to create databases in the cloud that are managed by AWS
+  - Supports 
+    - **MySQL**
+    - **PostgreSQL**
+    - **MariaDB**
+    - **Oracle**
+    - **Microsoft SQL Server**
+    - **IBM DB2**
+    - **Aurora (AWS Proprietary Database)**
+  - AWS itself handles **backup**, **patching**, **high availability** (Multi-AZ), and **scaling**.
 
 ### Advantage over using RDS versus deploying DB on EC2
 
 - RDS is a managed service:
-  - Automated provisioning, OS patching
+  - Automated provisioning of the database, OS patching will be done by WS
   - Continuous backups and restore to specific timestamp (Point in Time Restore)!
-  - Monitoring dashboards
+  - Monitoring dashboards to see if our database is doing good
   - Read replicas for improved read performance
   - Multi AZ setup for DR (Disaster Recovery)
   - Maintenance windows for upgrades
   - Scaling capability (vertical and horizontal)
   - Storage backed by EBS (gp2 or io1)
-- BUT you can’t SSH into your instances
+- BUT you can't SSH into your instances since AWS manages the database entirely for us
+
+## RDS Solution Architecture
+
+- We have our load balancer fronting multiple backend EC2 instances possibly into an Auto Scaling Group and they need to store and share the data somewhere. 
+- It is a structured data without using EBS, EFS or EC2 Instance Store
+- They will be using a database. Relational database in this case, so SQL based
+- EC2 instances will be connecting to the database an doing read writes all at once. All EC2 instances will be sharing the same database in the backend
+
+  ![RDS SOLUTION ARCHITECTURE](../images/RDS_Solution_Architecture.png)
+
+## Amazon Aurora
+
+- Aurora is a proprietary technology from AWS (not open sourced)
+- Works same way as RDS and we have our EC2 onstances connecting directly into Amazon Aurora
+
+  ![AMAZON AURORA](../images/Aurora.PNG)
+
+- **PostgreSQL** and **MySQL** are both supported as Aurora DB
+- Aurora is "AWS cloud optimized" and claims 5x performance improvement over MySQL on RDS, over 3x the performance of Postgres on RDS
+- Aurora storage automatically grows in increments of 10GB, up to 128 TB
+- Aurora costs more than RDS (20% more) – but is more efficient
+- Not in the free tier
+- Aurora is more cloud-native compared to RDS which runs the technologies you know directly as a managed service 
+
+## Amazon Aurora Serverless
+
+- We have a **serverless** option for Amazon Aurora where database instantiation is going to be automated and on top of it, you will have auto-scaling based on actual usage of your database
+- **PostgreSQL** and **MySQL** are both supported as Aurora Serverless DB
+- No capacity planning needed
+- Least management overhead
+- Pay per second, can be more cost-effective than provisioning an Aurora cluster yourself
+- Use cases: good for infrequent, intermittent or unpredictable workloads. How does that work?
+  - From client's perspective, it connects to a proxy fleet that is managed by Aurora
+  - Aurora, behind the scenes, is going to instantiate database instances when it needs to scale up or down
+  - These Aurora databases are going to be sharing the same storage volume no matter what
+  - From exam perspective, if you see Aurora with no management overhead, think of Aurora Serverless 
+
+  ![AURORA SERVERLESS](../images/Aurora_Serverless.PNG)
 
 ### RDS Deployments
 
@@ -122,7 +182,7 @@
 
 | Read Replicas                       | Multi-AZ                                          |
 | ----------------------------------- | ------------------------------------------------- |
-| Scale the read workload of your DB  | Failover in case of AZ outage (high availability) |
+| Scale the read workload of your DB (scalability) | Failover in case of AZ outage (high availability) |
 | Can create up to 5 Read Replicas    | Data is only read/written to the main database    |
 | Data is only written to the main DB | Can only have 1 other AZ as failover              |
 
@@ -136,16 +196,6 @@
   - Replication cost
 
 ![Multi-Region](../images/multi_region.png)
-
-## Amazon Aurora
-
-- **Amazon Aurora**: High-performance RDS database.
-  - Compatible with **MySQL** and **PostgreSQL**.
-  - **5x faster** than MySQL, **3x faster** than PostgreSQL.
-  - **Auto-scaling** storage up to **64 TB**.
-  - Supports **Multi-AZ** and up to **15 read replicas**.
-  - Great for **enterprise-grade** applications requiring high availability and performance.
-  - Aurora costs more than RDS (20% more) – but is more efficient
 
 ## Amazon ElastiCache Overview
 
