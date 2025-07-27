@@ -13,6 +13,8 @@
     - [failover routing policy](#failover-routing-policy)
   - [AWS CloudFront](#aws-cloudfront)
     - [CloudFront - Origins](#cloudfront---origins)
+    - [CloudFront at a high level](#cloudfront-at-a-high-level)
+    - [CloudFront - S3 as an origin](#cloudfront---s3-as-an-origin)
     - [CloudFront vs S3 Cross Region Replication](#cloudfront-vs-s3-cross-region-replication)
     - [S3 Transfer Acceleration](#s3-transfer-acceleration)
   - [AWS Global Accelerator](#aws-global-accelerator)
@@ -26,22 +28,22 @@
 ## Why make a global application?
 
 - A global application is an application deployed in **multiple geographies**
-- On AWS: this could be **Regions** and / or **Edge Locations**
+- When you translate this on AWS: this could mean that you deploy your application onto different **AWS Regions** and / or **Edge Locations**
 - **Decreased Latency**
-  - Latency is the time it takes for a network packet to reach a server
-  - It takes time for a packet from Asia to reach the US
-  - Deploy your applications closer to your users to decrease latency, better experience
+  - When you deploy the app on different AWS Regions and / or edge locations, what it gives for users around the world is a decreased latency
+  - **Latency** is the time it takes for a network packet to reach a server
+  - If you consider that Earth is big, then it takes more time for a packet from Asia to reach the US
+  - If you deploy your applications closer to your users then it will decrease the latency, and the users will have a better experience
 - **Disaster Recovery (DR)**
-  - If an AWS region goes down (earthquake, storms, power shutdown, politics)…
-  - You can fail-over to another region and have your application still working
+  - The idea is to not rely on one data center or one region. For example, if an entire AWS region goes down (earthquake, storms, power shutdown, politics), then by having disaster recovery strategy in place you can fail-over to another region and have your application will still be working
   - A DR plan is important to increase the availability of your application
-- **Attack protection**: distributed global infrastructure is harder to attack
+- **Attack protection**: It is common for hackers online to attack your application and if you have your application across multiple regions and distributed globally, then it is going to be much harder for an attacker to attack all these locations at once making you application more protected against these attacks
 
 ### Global AWS Infrastructure
 
 - Regions: For deploying applications and infrastructure
-- Availability Zones: Made of multiple data centers
-- Edge Locations (Points of Presence): for content delivery as close as possible to users
+- Availability Zones: Regions are made of multiple availability zones which are nothing but multiple data centers
+- Edge Locations (Points of Presence): Used for content delivery as close as possible to users. Cannot deploy an application there, but something like CloudFront will be using it 
 - More at: <https://infrastructure.aws/>
 
 ### Global Applications in AWS
@@ -50,8 +52,8 @@
   - Great to route users to the closest deployment with least latency
   - Great for disaster recovery strategies
 - **Global Content Delivery Network (CDN): CloudFront**
-  - Replicate part of your application to AWS Edge Locations – decrease latency
-  - Cache common requests – improved user experience and decreased latency
+  - Replicate part of your application to AWS Edge Locations again to decrease the latency
+  - Cache common requests – improved user experience and a decreased latency
 - **S3 Transfer Acceleration**
   - Accelerate global uploads & downloads into Amazon S3
 - **AWS Global Accelerator:**
@@ -59,15 +61,23 @@
 
 ## Amazon Route 53 Overview
 
+- Amazon Route53 is going to be very important for us to deploy a global application
 - Route53 is a Managed DNS (Domain Name System)
-- DNS is a collection of rules and records which helps clients understand how to reach a server through URLs.
+- DNS is like a phone book with a collection of rules and records which helps clients find the right servers through URLs.
 - In AWS, the most common records are:
-  - www.google.com => 12.34.56.78 == A record (IPv4)
-  - www.google.com => 2001:0db8:85a3:0000:0000:8a2e:0370:7334 == AAAA IPv6
-  - search.google.com => www.google.com == CNAME: hostname to hostname
-  - example.com => AWS resource == Alias (ex: ELB, CloudFront, S3, RDS, etc…)
+  - if you are mapping a **www.google.com** hostname to an **IP address** say, 12.34.56.78 then it is called an **A record (IPv4)**
+  - if you are mapping a **www.google.com** hostname to an **IPv6 address** say, 2001:0db8:85a3:0000:0000:8a2e:0370:7334 then it is called an **AAAA rcord (IPv6)**
+  - if you are mapping a **search.google.com** hostname to another hostname say, **www.google.com** then it is called a **CNAME** because we are mapping a **hostname to hostname**
+  - if you are mapping a **example.com** hostname to an **AWS resource**, it is a special type of rcord called an **Alias record (ex: ELB, CloudFront, S3, RDS, etc...)**
+- Basically, Route53 will allow us to create a record which will guide us to the instance that has the least latency
 
 ### Route 53 - Diagram for A Record
+
+- For Route53 say, we want to see what happens for an A record
+- We have a web browser and an application server that we have deployed that has a public IPv4
+- We want to be able to access our application server using a normal URL
+- For this, we go into Route53 and create an A record so that when the web browser does a DNS request for **myapp.mydomain.com**, the DNS will reply back with an IP
+- That IP can be used by our web browser to get to our correct server and then get the HTTP response from our server. At a very high level this is how th DNS works
 
 ![Route 53](./images/../../images/Route_53.png)
 
@@ -87,60 +97,67 @@ sequenceDiagram
 
 Need to know them at a high-level for the Cloud Practitioner Exam
 
-- simple routing policy
-- weighted routing policy
-- latency routing policy
-- failover routing policy
+- Simple Routing Policy
+- Weighted Routing Policy
+- Latency Routing Policy
+- Failover Routing Policy
 
 ### simple routing policy
 
 - Use for a single resource that performs a given function for your domain
-- for example, a web server that serves content for the example.com website.
+- for example, a web server that serves content for the example.com website
 - You can use simple routing to create records in a private hosted zone
 
 ### weighted routing policy
 
-- Use to route traffic to multiple resources in proportions that you specify.
-- You can use weighted routing to create records in a private hosted zone.
+- Use to route traffic to multiple resources in proportions that you specify
+- You can use weighted routing to create records in a private hosted zone
 
 ### latency routing policy
 
-- Use when you have resources in multiple AWS Regions and you want to route traffic to the region that provides the best latency.
-- You can use latency routing to create records in a private hosted zone.
+- Use when you have resources in multiple AWS Regions and you want to route traffic to the region that provides the best latency
+- You can use latency routing to create records in a private hosted zone
 
 ### failover routing policy
 
-- Use when you want to configure active-passive failover.
-- You can use failover routing to create records in a private hosted zone.
+- Use when you want to configure active-passive failover
+- You can use failover routing to create records in a private hosted zone
 
 ## AWS CloudFront
 
 - Content Delivery Network (CDN)
 - **Improves read performance, content is cached at the edge**
 - Improves users experience
-- 216 Point of Presence globally (edge locations)
-- DDoS protection (because worldwide), integration with Shield, AWS Web Application Firewall
+- CloudFront is made of 216 Points of Presence globally which corresponds to edge locations around the world, and AWS keeps on adding locations to improve user experience even further everywhere
+- By having the content distributed globally, we are getting a DDoS protection because your application is worldwide then you are protected against these attacks, integration with Shield, AWS Web Application Firewall
 - Source: <https://aws.amazon.com/cloudfront/features/?nc=sn&loc=2>
+- Example - Say, we had created an S3 bucket and website on our S3 bucket in Australia, but we had a user may be in the US of A, then if the user requests the content from a American Edge location using CloudFront, and CloudFront will be able to fetch the content from Australia. Now, if another user in the US of A requests the same content, then it will be served directly from the edge without going all the way to Australia to serve that content. Same holds true for an user in China, it will talk to a Chinese Point of Presence, which is redirected to the S3 buckets in Australia, later the content will be cached at the Chinese edge location for other user requests
 
 ### CloudFront - Origins
 
+CloudFront has several types of origins, which are basically backends you want the CloudFront to connect to
 - S3 bucket
   - For distributing files and caching them at the edge
-  - Enhanced security with CloudFront Origin Access Identity (OAI)
-  - CloudFront can be used as an ingress (to upload files to S3)
-- Custom Origin (HTTP)
-  - Application Load Balancer
-  - EC2 instance
-  - S3 website (must first enable the bucket as a static S3 website)
-  - Any HTTP backend you want
+  - For uploading files to S3, CloudFront can be used as an ingress
+  - The connection between S3 bucket and CloudFront is enhanced with security using Origin Access Control (OAC)
+- VPC Origin
+  - We can connect CloudFront directly to the applications hosted in VPC private subnets
+  - Application Load Balancer / Network Load Balancer / EC2 Instances
+- Custom Origin (anything that uses HTTP can be used in the backend)
+  - An S3 website (must first enable the bucket as a static S3 website)
+  - Any public HTTP backend you want within or outside of AWS
+
+### CloudFront at a high level
+
+### CloudFront - S3 as an origin
 
 ### CloudFront vs S3 Cross Region Replication
 
-| CloudFront                                                     | S3 Cross Region Replication                                                            |
-| -------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Global Edge network                                            | Must be setup for each region you want replication to happen                           |
-| Files are cached for a TTL (Time to Live) (maybe a day)        | Files are updated in near real-time, Read only                                         |
-| **Great for static content that must be available everywhere** | **Great for dynamic content that needs to be available at low-latency in few regions** |
+| CloudFront | S3 Cross Region Replication |
+| ---------- | --------------------------- |
+| Global Edge network (about 216 Points of Presence) | Must be setup for each region you want replication to happen |
+| Files are cached in each edge location for a TTL (Time to Live) (maybe a day) | Files are updated in near real-time. It is for read-only |
+| **Great for static content that must be available everywhere around the world** | **Great for dynamic content that needs to change all the time and be available at low-latency in a few regions** |
 
 ### S3 Transfer Acceleration
 
