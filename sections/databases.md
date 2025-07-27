@@ -15,32 +15,32 @@
     - [RDS Deployments: Read Replicas, Multi-AZ](#rds-deployments-read-replicas-multi-az)
     - [RDS Deployments: Multi-Region](#rds-deployments-multi-region)
   - [Amazon ElastiCache Overview](#amazon-elasticache-overview)
-  - [DynamoDB](#dynamodb)
+  - [DynamoDB Overview](#dynamodb-overview)
     - [DynamoDB Accelerator (DAX)](#dynamodb-accelerator-dax)
     - [DynamoDB Global Tables](#dynamodb-global-tables)
   - [Redshift Overview](#redshift-overview)
-  - [Amazon EMR (Elastic MapReduce)](#amazon-emr-elastic-mapreduce)
-  - [Amazon Athena](#amazon-athena)
-  - [Amazon QuickSight](#amazon-quicksight)
-  - [DocumentDB (with MongoDB Compatibility)](#documentdb-with-mongodb-compatibility)
-  - [Amazon Neptune](#amazon-neptune)
+  - [Amazon EMR (Elastic MapReduce) Overview](#amazon-emr-elastic-mapreduce-overview)
+  - [Amazon Athena Overview](#amazon-athena-overview)
+  - [Amazon QuickSight Overview](#amazon-quicksight-overview)
+  - [DocumentDB (with MongoDB Compatibility) Overview](#documentdb-with-mongodb-compatibility-overview)
+  - [Amazon Neptune Overview](#amazon-neptune-overview)
   - [Amazon QLDB](#amazon-qldb)
-  - [Amazon Managed Blockchain](#amazon-managed-blockchain)
-  - [AWS Glue](#aws-glue)
-  - [DMS - Database Migration Service](#dms---database-migration-service)
+  - [Amazon Managed Blockchain Overview](#amazon-managed-blockchain-overview)
+  - [AWS Glue Overview](#aws-glue-overview)
+  - [DMS - Database Migration Service Overview](#dms---database-migration-service-overview)
   - [Databases \& Analytics Summary](#databases--analytics-summary)
 
 ## Databases Intro
 
 - Storing data on disk (EFS, EBS, EC2 Instance Store, S3) can have its limits
-- Sometimes, you want to store data in a database…
+- Sometimes, you want to store data in a database...
 - You can **structure** the data
 - You build **indexes** to efficiently **query** / **search** through the data
 - You define **relationships** between your datasets
-- Databases are **optimized for a purpose** and come with different features, shapes and constraint
+- Databases are **optimized for a purpose** and come with different features, shapes and constraints
 - **Managed Databases**: AWS takes care of maintenance, backups, and security for databases.
 - **Benefits**: Reduced operational complexity, built-in high availability, disaster recovery, scalability, and enhanced security.
-- **Types**:
+- **Types of databases:**
   - **Relational Databases** (SQL)
   - **NoSQL Databases**
   - **Data Warehousing**
@@ -48,22 +48,22 @@
 
 ## Relational Databases (SQL)
 
-- Looks just like Excel spreadsheets, with links between them
+- Looks just like Excel spreadsheets, with links between each table
 - Can use SQL language to perform queries / lookups
-- **Structured Data**: Stored in predefined schema tables, managed with SQL.
-- **Use Cases**: Transactional applications, financial systems.
-- **Examples**: MySQL, PostgreSQL, Oracle, SQL Server, MariaDB.
+- **Structured Data**: Stored in predefined schema tables, managed with SQL
+- **Use Cases**: Transactional applications, financial systems
+- **Examples**: MySQL, PostgreSQL, Oracle, SQL Server, MariaDB
 
 ## NoSQL Databases
 
-- NoSQL = non-SQL = non relational databases
-- NoSQL databases are built for a specific data models and have flexible schemas for building modern applications. The schema is basically the shape of the data
+- NoSQL = non-SQL = non-relational databases
+- NoSQL databases are modern databases built for a specific data models and have flexible schemas for building modern applications. The schema is basically the shape of the data
 - **Use Cases**: Real-time applications, IoT, mobile apps.
 - Benefits:
   - Flexibility: easy to evolve data model
   - Scalability: designed to scale-out by using distributed clusters. For example, in relational databases, it is not easy to add servers to scale it, you have to do a vertical scaling, but with NoSQL databases, you can do horizontal scaling
-  - High-performance: optimized for a specific data model
-  - Highly functional: types optimized for the data model
+  - High-performance: means it is optimized for a specific data model
+  - Highly functional: means its types are optimized for the data model
 - **Examples**: Key-value, document, graph, in-memory, search databases
 
 ### NoSQL data example: JSON
@@ -71,7 +71,7 @@
 - JSON is a common form of data that fits into a NoSQL model
 - Data can be **nested**
 - Fields can **change** over time
-- Support for new types: **arrays**, etc…
+- Support for new types: **arrays**, etc...
 
 ```json
 {
@@ -95,10 +95,10 @@
 - AWS offers us to **manage** different databases
 - **Benefits include:**
   - Quick to provision, High Availability, Vertical and Horizontal Scaling
-  - Automated Backup & Restore, Operations, Upgrades
-  - Operating System Patching is handled by AWS
+  - They also include some utilities to do Automated Backup & Restore, Operations, Upgrades
+  - Operating System Patching of the underlying instance is handled by AWS
   - Monitoring, alerting are going to be integrated
-- Note: many database technologies could be run on EC2, but you must handle yourself the resiliency, backup, patching, high availability, fault tolerance, scaling. This is why using a managed databases is going to be a lifesaver
+- Note: many database technologies could be run on EC2, but when you install your database on the EC2 instance, then you must handle yourself the resiliency, backup, patching, high availability, fault tolerance, and scaling. This is why using a managed databases are going to be a lifesaver
 
 | **AWS Responsibility**                      | **Customer Responsibility**                      |
 | ------------------------------------------- | ------------------------------------------------ |
@@ -109,7 +109,7 @@
 
 - **RDS (Relational Database Service)**: 
   - Fully managed service for relational databases.
-  - It’s a managed DB service for DB use SQL as a query language.
+  - It's a managed DB service for DB use SQL as a query language.
   - It allows you to create databases in the cloud that are managed by AWS
   - Supports 
     - **MySQL**
@@ -137,16 +137,16 @@
 ## RDS Solution Architecture
 
 - We have our load balancer fronting multiple backend EC2 instances possibly into an Auto Scaling Group and they need to store and share the data somewhere. 
-- It is a structured data without using EBS, EFS or EC2 Instance Store
+- It is a structured data which is not using EBS, EFS or EC2 Instance Store
 - They will be using a database. Relational database in this case, so SQL based
-- EC2 instances will be connecting to the database an doing read writes all at once. All EC2 instances will be sharing the same database in the backend
+- EC2 instances will be connecting to the database and doing read/writes all at once. All EC2 instances will be sharing the same database in the backend
 
   ![RDS SOLUTION ARCHITECTURE](../images/RDS_Solution_Architecture.png)
 
 ## Amazon Aurora
 
 - Aurora is a proprietary technology from AWS (not open sourced)
-- Works same way as RDS and we have our EC2 onstances connecting directly into Amazon Aurora
+- Works same way as RDS and we have our EC2 instances connecting directly into Amazon Aurora
 
   ![AMAZON AURORA](../images/Aurora.PNG)
 
@@ -206,7 +206,7 @@
   - Caches are in-memory databases with high performance, low latency
   - AWS takes care of OS maintenance / patching, optimizations, setup, configuration, monitoring, failure recovery and backup
 
-## DynamoDB
+## DynamoDB Overview
 
 - Fully managed, serverless NoSQL database.
 - Supports key-value and document data models.
@@ -245,7 +245,7 @@
 - Pay-per-query or **reserved instances** for cost savings.
 - Designed for **massive datasets**.
 
-## Amazon EMR (Elastic MapReduce)
+## Amazon EMR (Elastic MapReduce) Overview
 
 - Managed big data processing service.
 - Uses **Hadoop**, **Apache Spark**, and **Hive** for processing large data sets.
@@ -256,7 +256,7 @@
 - Auto-scaling and integrated with Spot instances
 - Use cases: data processing, machine learning, web indexing, big data
 
-## Amazon Athena
+## Amazon Athena Overview
 
 - Serverless query service
 - Use **SQL** to query structured and unstructured data stored in **S3**.
@@ -267,7 +267,7 @@
 - Use cases: Business intelligence / analytics / reporting, analyze & query VPC Flow Logs, ELB Logs, CloudTrail trails, etc...
 - Analyze data in S3 using serverless SQL, use Athena
 
-## Amazon QuickSight
+## Amazon QuickSight Overview
 
 - Business Intelligence (BI) tool for data visualization.
 - Serverless machine learning-powered business intelligence service to create interactive dashboards
@@ -280,7 +280,7 @@
   - Perform ad-hoc analysis
   - Get business insights using data
 
-## DocumentDB (with MongoDB Compatibility)
+## DocumentDB (with MongoDB Compatibility) Overview
 
 - Managed document database, **MongoDB-compatible**.
 - DocumentDB is the same for MongoDB (which is a NoSQL database)
@@ -290,7 +290,7 @@
 - Automatically scales to workloads with millions of requests per seconds
 - Use cases: Content management, cataloging, and mobile backends.
 
-## Amazon Neptune
+## Amazon Neptune Overview
 
 - Fully managed graph database
 - A popular graph dataset would be a social network
@@ -314,7 +314,7 @@
 - 2-3x better performance than common ledger blockchain frameworks, manipulate data using SQL
 - Difference with Amazon Managed Blockchain: no decentralization component, in accordance with financial regulation rules
 
-## Amazon Managed Blockchain
+## Amazon Managed Blockchain Overview
 
 - Blockchain makes it possible to build applications where multiple parties can execute transactions without the need for a trusted, central authority.
 - Amazon Managed Blockchain is a managed service to:
@@ -322,7 +322,7 @@
   - Or create your own scalable private network
 - Compatible with the frameworks Hyperledger Fabric & Ethereum
 
-## AWS Glue
+## AWS Glue Overview
 
 - Managed extract, transform, and load (ETL) service
 - Useful to prepare and transform data for analytics
@@ -330,7 +330,7 @@
 - Glue Data Catalog: catalog of datasets
   - can be used by Athena, Redshift, EMR
 
-## DMS - Database Migration Service
+## DMS - Database Migration Service Overview
 
 - Quickly and securely migrate databases to AWS, resilient, self healing
 - The source database remains available during the migration
