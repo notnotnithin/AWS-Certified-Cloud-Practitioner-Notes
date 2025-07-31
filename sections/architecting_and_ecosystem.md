@@ -11,10 +11,22 @@
     - [5. Cost Optimization](#5-cost-optimization)
     - [6. Sustainability](#6-sustainability)
   - [AWS Well-Architected Tool](#aws-well-architected-tool)
+  - [AWS Customer Carbon Footprint Tool](#aws-customer-carbon-footprint-tool)
+  - [AWS Cloud Adoption Framework (AWS CAF)](#aws-cloud-adoption-framework-aws-caf)
+    - [CAF Perspectives and Foundational Capabilities Business Capabilities](#caf-perspectives-and-foundational-capabilities-business-capabilities)
+    - [Cloud Transformation Value Chain](#cloud-transformation-value-chain)
+    - [AWS CAF – Transformation Domains](#aws-caf--transformation-domains)
+    - [AWS CAF – Transformation Phases](#aws-caf--transformation-phases)
   - [AWS Right Sizing](#aws-right-sizing)
   - [AWS Ecosystem - Free Resources](#aws-ecosystem---free-resources)
     - [AWS Ecosystem - AWS Support](#aws-ecosystem---aws-support)
   - [AWS Marketplace](#aws-marketplace)
+  - [AWS Training](#aws-training)
+  - [AWS Professional Services \& Partner Network](#aws-professional-services--partner-network)
+  - [AWS IQ](#aws-iq)
+  - [AWS re:Post](#aws-repost)
+    - [AWS re:Post - Knowledge Center](#aws-repost---knowledge-center)
+  - [AWS Managed Services (AMS)](#aws-managed-services-ams)
 
 ## Well Architected Framework General Guiding Principles
 
@@ -119,41 +131,167 @@
 
 ## AWS Well-Architected Tool
 
-- Free tool to review architectures against the 6 pillars and adopt best practices
+- The idea is that you want to review your architectures against the 6 pillars and adopt architectural best practices
+
+  ![](../images/AWS_Well_Architected_Tool.PNG)
+
 - **How it works**:
-  - Select your workload and answer questions
-  - Review answers against the 6 pillars
-  - Obtain advice: videos, documentation, reports, and dashboards
+  - You select your workload and answer questions. Questions are specifically called as lens that provide a set questions for you to consider for all of your cloud architecture. You can also define custom lens if you wanted to
+  - Then you review answers against the 6 pillars 
+  - Then you obtain advice via: videos, documentation, reports, and dashboards
+- Let's have a look: https://console.aws.amazon.com/wellarchitected
+
+## AWS Customer Carbon Footprint Tool
+
+  ![AWS CUSTOMER CARBON FOOTPRINT TOOL](../images/AWS_CustomerCarbonFootprintTool.PNG)
+
+- A tool used to track, measure, review, and forecast the Carbon emissions generated from your AWS usage
+- Helps you meet your own sustainability goals
+- This tool is going to give you access to your carbon emissions, your savings, and understanding which services is emitting a lot of carbon, as well as tracking your emissions over time and seeing a path to 100% renewable energy used for your AWS accounts
+
+## AWS Cloud Adoption Framework (AWS CAF)
+
+  ![AWS CAF](../images/AWS_CAF.PNG)
+
+- Helps you build and then execute a comprehensive plan for your digital transformation through innovative use of AWS
+- Created by AWS Professionals by taking advantage of AWS Best Practices and lessons learned from 1000s of customers
+- AWS CAF identifies specific organizational capabilitie that underpin successful cloud transformations
+- AWS CAF groups its capabilities in six perspectives: Business, People, Governance, Platform, Security, and Operations
+
+### CAF Perspectives and Foundational Capabilities Business Capabilities
+
+- **Business Perspective** helps ensure that your cloud investments accelerate your digital transformation ambitions and business outcomes
+- **People Perspective** serves **as a bridge between technology and business**, accelerating the cloud journey to help organizations more rapidly evolve to a culture of continuous growth, learning, and where change becomes business-as-normal, with focus on culture, organizational structure, leadership, and workforce
+- **Governance Perspective** helps you orchestrate your cloud initiatives while maximizing organizational benefits and minimizing transformation-related risks
+
+  ![AWS CAF PERSPECTIVES-1](../images/AWS_CAF_Perspectives_1.PNG)
+
+- Platform Perspective helps you build an enterprise-grade, scalable, hybrid cloud platform; modernize existing workloads; and implement new cloud-native solutions.
+- Security Perspective helps you achieve the confidentiality, integrity, and availability of your data and cloud workloads.
+- Operations Perspective helps ensure that your cloud services are delivered at a level that meets the needs of your business.
+
+  ![AWS CAF PERSPECTIVES-2](../images/AWS_CAF_Perspectives_2.PNG)
+
+### Cloud Transformation Value Chain
+
+  ![CLOUD FORMATION VALUE CHAIN](../images/CloudFormation_ValueChain.PNG)
+
+### AWS CAF – Transformation Domains
+
+- **Technology** - using the cloud to migrate and modernize legacy infrastructure, applications, data and analytics platforms…
+- **Process** - digitizing, automating, and optimizing your business operations
+  - leveraging new data and analytics platforms to create actionable insights
+  - using machine learning (ML) to improve your customer service experience...
+- **Organization** - Reimagining your operating model
+  - Organizing your teams around products and value streams
+  - Leveraging agile methods to rapidly iterate and evolve
+- **Product** – reimagining your business model by creating new value propositions (products & services) and revenue models
+
+### AWS CAF – Transformation Phases
+
+- **Envision** – demonstrate how the Cloud will accelerate business outcomes by identifying transformation opportunities and create a
+foundation for your digital transformation
+- **Align** – identify capability gaps across the 6 AWS CAF Perspectives which results in an Action Plan
+- **Launch** – build and deliver pilot initiatives in production and demonstrate incremental business value
+- **Scale** – expand pilot initiatives to the desired scale while realizing the desired business benefits
 
 ## AWS Right Sizing
 
-- Match instance types and sizes to workload performance and capacity requirements at the lowest cost
-- Right sizing involves starting small and scaling up easily, continuously adjusting after cloud onboarding, and using tools like CloudWatch, Cost Explorer, and Trusted Advisor
+- EC2 has many instance types, but choosing the most powerful instance type isn’t the best choice, because the cloud is **elastic**
+- Right sizing is the process of matching instance types and sizes to your workload performance and capacity requirements **at the lowest possible cost**
+- **Scaling up is easy so always start small**
+- It’s also the process of looking at deployed instances and identifying opportunities to eliminate or downsize without compromising capacity or other requirements, which results in lower costs
+- It’s important to Right Size...
+  - **before a Cloud Migration**
+  - **continuously after the cloud onboarding process (requirements change over time)**
+- CloudWatch, Cost Explorer, Trusted Advisor, 3rd party tools can help
 
 ## AWS Ecosystem - Free Resources
 
 - **AWS Blogs**: [AWS Blogs](https://aws.amazon.com/blogs/aws/)
 - **AWS Forums**: [AWS Forums](https://forums.aws.amazon.com/index.jspa)
 - **AWS Whitepapers & Guides**: [AWS Whitepapers & Guides](https://aws.amazon.com/whitepapers)
-- **AWS Quick Starts**: [AWS Quick Starts](https://aws.amazon.com/quickstart/)
-  - Automated, gold-standard deployments in the AWS Cloud.
-  - Examples: WordPress on AWS, leveraging CloudFormation.
-- **AWS Solutions**: [AWS Solutions](https://aws.amazon.com/solutions/)
+- **AWS Solutions Library (formerly AWS Quick Starts)**: [AWS Quick Starts](https://aws.amazon.com/solutions/)
   - Vetted technology solutions for the AWS Cloud.
-  - Example - AWS Landing Zone (secure, multi-account environment).
+  - Example - [live streaming on AWS](https://aws.amazon.com/solutions/implementations/live-streaming-on-aws)
 
 ### AWS Ecosystem - AWS Support
 
-| DEVELOPER                                               | BUSINESS                                                      | ENTERPRISE                                                      |
-| ------------------------------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------------- |
-| Business hours email access to Cloud Support Associates | 24x7 phone, email, and chat access to Cloud Support Engineers | Access to a Technical Account Manager (TAM)                     |
-| General guidance: < 24 business hours                   | Production system impaired: < 4 hours                         | Concierge Support Team (for billing and account best practices) |
-| System impaired: < 12 business hours                    | Production system down: < 1 hour                              | Business-critical system down: < 15 minutes                     |
+| DEVELOPER | BUSINESS | ENTERPRISE |
+| --------- | -------- | ---------- |
+| Business hours email access to Cloud Support Associates | 24x7 phone, email, and chat access to Cloud Support Engineers | Access to a Technical Account Manager (TAM) |
+| General guidance: < 24 business hours | Production system impaired: < 4 hours | Concierge Support Team (for billing and account best practices) |
+| System impaired: < 12 business hours | Production system down: < 1 hour | Business-critical system down: < 15 minutes |
 
 ## AWS Marketplace
 
-- Digital catalog with thousands of software listings from independent software vendors.
+- Digital catalog with thousands of software listings from independent software vendors (3rd party)
 - Examples:
-  - Custom AMIs, CloudFormation templates, SaaS, containers.
-- Purchases go into your AWS bill.
-- You can sell your own solutions on the AWS Marketplace.
+  - Custom AMI (custom OS, firewalls, technical solutions...)
+  - CloudFormation templates
+  - SaaS
+  - Containers.
+- If you buy through the AWS Marketplace, it goes into your AWS bill
+- You can **sell your own solutions** on the AWS Marketplace.
+
+## AWS Training
+
+- AWS Digital (online) and Classroom Training (in-person or virtual)
+- AWS Private Training (for your organization)
+- Training and Certification for the U.S Government
+- Training and Certification for the Enterprise
+- AWS Academy: helps universities teach AWS
+- And your favorite online teacher... 
+  teaching you all about AWS Certifications and more!
+
+## AWS Professional Services & Partner Network
+
+- The AWS Professional Services organization is a global team of experts
+- They work alongside your team and a chosen member of the APN
+- APN = AWS Partner Network
+- **APN Technology Partners:** providing hardware, connectivity, and software
+- **APN Consulting Partners:** professional services firm to help build on AWS
+- **APN Training Partners:** find who can help you learn AWS
+- **AWS Competency Program:** AWS Competencies are granted to APN Partners who have demonstrated technical proficiency and proven customer success in specialized solution areas.
+- **AWS Navigate Program:** help Partners become better Partners
+
+## AWS IQ
+
+- Quickly find professional help for your AWS projects
+- Engage and pay AWS Certified 3rd party experts for on-demand project work
+- Video-conferencing, contract management, secure collaboration, integrated billing
+- **For Customers**
+
+  ![AWS IQ CUSTOMERS](../images/AWS_IQ_Customers.PNG)
+
+- **For Experts**
+
+  ![AWS IQ EXPERTS](../images/AWS_IQ_Experts.PNG)
+
+## AWS re:Post
+
+- **AWS-managed Q&A service** offering crowd-sourced, expert-reviewed answers to your technical questions about AWS that replaces the original AWS Forums
+- Part of the AWS Free Tier
+- Community members can earn reputation points to build up their community expert status by providing accepted answers and reviewing answers from other users
+
+  ![AWS REPOST](../images/AWS_rePost.PNG)
+
+- **Questions from AWS Premium Support customers that do not receive a response from the community are passed on to AWS Support engineers**
+- AWS re:Post is not intended to be used for questions that are time-sensitive or involve any proprietary information
+
+### AWS re:Post - Knowledge Center
+
+- Contains the most frequent & common questions and requests
+
+  ![AWS REPOST KNOWLEDGE CENTER](../images/AWS_rePost_KnowledgeCenter.PNG)
+
+## AWS Managed Services (AMS)
+
+- Provides infrastructure and application support on AWS.
+- **AMS offers a team of AWS experts** who manage and operate your infrastructure for security, reliability, and availability
+- Helps organizations offload routine management tasks and focus on their business objectives.
+- Fully managed service, so AWS handles common activities such as change requests, monitoring, patch management, security, and backup services
+- Implements best practices and maintains your AWS infrastructure to reduce your operational overhead and risk
+- AMS business hours are 24/365
+
+  ![AWS MANAGED SERVICES](../images/AWS_ManagedServices.PNG)
