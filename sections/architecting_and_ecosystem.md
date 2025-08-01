@@ -13,7 +13,9 @@
   - [AWS Well-Architected Tool](#aws-well-architected-tool)
   - [AWS Customer Carbon Footprint Tool](#aws-customer-carbon-footprint-tool)
   - [AWS Cloud Adoption Framework (AWS CAF)](#aws-cloud-adoption-framework-aws-caf)
-    - [CAF Perspectives and Foundational Capabilities Business Capabilities](#caf-perspectives-and-foundational-capabilities-business-capabilities)
+    - [CAF Perspectives and Foundational Capabilities](#caf-perspectives-and-foundational-capabilities)
+      - [Business Capabilities](#business-capabilities)
+      - [Technical Capabilities](#technical-capabilities)
     - [Cloud Transformation Value Chain](#cloud-transformation-value-chain)
     - [AWS CAF – Transformation Domains](#aws-caf--transformation-domains)
     - [AWS CAF – Transformation Phases](#aws-caf--transformation-phases)
@@ -151,26 +153,49 @@
 
 ## AWS Cloud Adoption Framework (AWS CAF)
 
-  ![AWS CAF](../images/AWS_CAF.PNG)
+- Basically, AWS CAF is a white paper and not a service, but the cloud adoption framework helps you build and then execute a comprehensive plan to do your digital transformation through innovative use of AWS. 
+- In short, AWS CAF helps to leverage a cloud to be transformed
+- It is created by AWS Professionals by taking advantage of AWS Best Practices and lessons learned from 1000s of customers
+- AWS CAF identifies **two** components:
+  - Organizational capabilities that underpins successful cloud transformations
+  - These capabilities are regrouped into **six perspectives**:
+    - **Business**
+    - **People**
+    - **Governance**
+    - **Platform**
+    - **Security**
+    - **Operations**
+  - We can divide them again into **two** categories:
+    - Business Capabilities
+    - Technical Capabilities
 
-- Helps you build and then execute a comprehensive plan for your digital transformation through innovative use of AWS
-- Created by AWS Professionals by taking advantage of AWS Best Practices and lessons learned from 1000s of customers
-- AWS CAF identifies specific organizational capabilitie that underpin successful cloud transformations
-- AWS CAF groups its capabilities in six perspectives: Business, People, Governance, Platform, Security, and Operations
-
-### CAF Perspectives and Foundational Capabilities Business Capabilities
+### CAF Perspectives and Foundational Capabilities
+#### Business Capabilities
 
 - **Business Perspective** helps ensure that your cloud investments accelerate your digital transformation ambitions and business outcomes
-- **People Perspective** serves **as a bridge between technology and business**, accelerating the cloud journey to help organizations more rapidly evolve to a culture of continuous growth, learning, and where change becomes business-as-normal, with focus on culture, organizational structure, leadership, and workforce
+- **People Perspective** serves **as a bridge between technology and business**, accelerating the cloud journey to help organizations more rapidly evolve to a culture of continuous growth, learning, and where change becomes business-as-normal, and through the people you have a focus on culture, organizational structure, leadership, and workforce
 - **Governance Perspective** helps you orchestrate your cloud initiatives while maximizing organizational benefits and minimizing transformation-related risks
 
   ![AWS CAF PERSPECTIVES-1](../images/AWS_CAF_Perspectives_1.PNG)
 
-- Platform Perspective helps you build an enterprise-grade, scalable, hybrid cloud platform; modernize existing workloads; and implement new cloud-native solutions.
-- Security Perspective helps you achieve the confidentiality, integrity, and availability of your data and cloud workloads.
-- Operations Perspective helps ensure that your cloud services are delivered at a level that meets the needs of your business.
+- Within each of these perspectives we have the capabilities
+- Under business, we have capabilities that are related to business 
+- Under people, we have all the capabilities that are related to people
+- Under governance, we have all the capabilities related to governance
+- No need to remember this diagram for the exam
+
+#### Technical Capabilities
+
+- **Platform Perspective** helps you build an enterprise-grade, scalable, hybrid cloud platform; modernize existing workloads; and implement new cloud-native solutions.
+- **Security Perspective** helps you achieve the confidentiality, integrity, and availability of your data and cloud workloads.
+- **Operations Perspective** helps ensure that your cloud services are delivered at a level that meets the needs of your business.
 
   ![AWS CAF PERSPECTIVES-2](../images/AWS_CAF_Perspectives_2.PNG)
+
+- Again we have capabilities within these perspectives
+- Under platform, we have capabilities that are related to platform
+- Under security, we have anything related to security
+- Under operations, we have everything about operations we do in the cloud
 
 ### Cloud Transformation Value Chain
 
@@ -178,32 +203,34 @@
 
 ### AWS CAF – Transformation Domains
 
-- **Technology** - using the cloud to migrate and modernize legacy infrastructure, applications, data and analytics platforms…
-- **Process** - digitizing, automating, and optimizing your business operations
-  - leveraging new data and analytics platforms to create actionable insights
-  - using machine learning (ML) to improve your customer service experience...
-- **Organization** - Reimagining your operating model
-  - Organizing your teams around products and value streams
-  - Leveraging agile methods to rapidly iterate and evolve
-- **Product** – reimagining your business model by creating new value propositions (products & services) and revenue models
+- These domains helps you drive business outcomes
+- **Technology** - we use the cloud to migrate and modernize legacy infrastructure, applications, data and analytics platforms...
+- **Process** - we want to be digitizing everything, automating, and optimizing your business operations
+  - means you want to be leveraging new data and analytics platforms to create actionable insights
+  - and using machine learning (ML) to improve your customer service experience...
+- **Organization** - How do you reimagine your operating model?
+  - you want to reorganize your teams around products and value streams
+  - you want to **leverage agile methods to rapidly iterate and evolve**
+- **Product** – reimagining your business model by creating new value propositions (such as products & services) and revenue models
 
 ### AWS CAF – Transformation Phases
 
-- **Envision** – demonstrate how the Cloud will accelerate business outcomes by identifying transformation opportunities and create a
-foundation for your digital transformation
-- **Align** – identify capability gaps across the 6 AWS CAF Perspectives which results in an Action Plan
-- **Launch** – build and deliver pilot initiatives in production and demonstrate incremental business value
-- **Scale** – expand pilot initiatives to the desired scale while realizing the desired business benefits
+- **Envision** – this is when you want to demonstrate how the cloud will accelerate business outcomes by identifying transformation opportunities and create a foundation for your digital transformation
+- **Align** – this is where you look at the six CAF perspectives we have seen, and we identify capability gaps and this will result in an Action Plan
+- **Launch** – where we build and deliver pilot initiatives in production and demonstrate incremental business value
+- **Scale** – to expand these pilot initiatives to the desired scale while realizing the desired business benefits
 
 ## AWS Right Sizing
 
-- EC2 has many instance types, but choosing the most powerful instance type isn’t the best choice, because the cloud is **elastic**
-- Right sizing is the process of matching instance types and sizes to your workload performance and capacity requirements **at the lowest possible cost**
-- **Scaling up is easy so always start small**
-- It’s also the process of looking at deployed instances and identifying opportunities to eliminate or downsize without compromising capacity or other requirements, which results in lower costs
-- It’s important to Right Size...
-  - **before a Cloud Migration**
-  - **continuously after the cloud onboarding process (requirements change over time)**
+- The idea is you have so many EC2 instance types, but choosing the most powerful instance type isn't the best choice, because the cloud is **elastic** and you can change the instance type whenever you want
+- Right sizing is the process of matching instance types and sizes to your workload performance and capacity requirements **at the lowest possible cost** making sure the size is right
+- **Scaling up is easy so always start small to find the right size**
+- It's also the process of looking at deployed instances and, for example, looking at their metrics, to identify opportunities to eliminate or downsize without compromising capacity or other requirements, which in turn results in lower costs
+- It’s important to Right Size in two moments in your cloud journey:
+  - **before a Cloud Migration** - because it is very common for a company to just migrate to the cloud, puts everything with biggest instance size and forget it. This is not the best way. **You need to right size before you do cloud migration**
+  - **continuously after the cloud onboarding process (requirements change over time)** - it is important to see if you need to right size-up or right-size down
+- You need to always scale up over time, so start small
+- You right size just before a cloud migration, and also continuously in the cloud
 - CloudWatch, Cost Explorer, Trusted Advisor, 3rd party tools can help
 
 ## AWS Ecosystem - Free Resources
@@ -213,7 +240,7 @@ foundation for your digital transformation
 - **AWS Whitepapers & Guides**: [AWS Whitepapers & Guides](https://aws.amazon.com/whitepapers)
 - **AWS Solutions Library (formerly AWS Quick Starts)**: [AWS Quick Starts](https://aws.amazon.com/solutions/)
   - Vetted technology solutions for the AWS Cloud.
-  - Example - [live streaming on AWS](https://aws.amazon.com/solutions/implementations/live-streaming-on-aws)
+  - Example - If you want to implement live streaming on AWS, you would just find it on the solutions website [live streaming on AWS](https://aws.amazon.com/solutions/implementations/live-streaming-on-aws)
 
 ### AWS Ecosystem - AWS Support
 
@@ -225,73 +252,95 @@ foundation for your digital transformation
 
 ## AWS Marketplace
 
-- Digital catalog with thousands of software listings from independent software vendors (3rd party)
+- It is a digital catalog with thousands of software listings from **independent software vendors** (3rd party)
 - Examples:
-  - Custom AMI (custom OS, firewalls, technical solutions...)
-  - CloudFormation templates
-  - SaaS
-  - Containers.
-- If you buy through the AWS Marketplace, it goes into your AWS bill
-- You can **sell your own solutions** on the AWS Marketplace.
+  - Custom AMI (custom OS, firewalls, technical solutions...) -  you can buy a AMI for someone that was customized with some OS, some firewalls, or some technical solutions 
+  - CloudFormation templates - You can also buy CloudFormation templates that are production ready
+  - Software as a Service
+  - Containers
+- If you buy through the AWS Marketplace, the advantage is it goes directly into your AWS bill
+- You can **sell your own solutions** on the AWS Marketplace if you want to become a marketplace seller
 
 ## AWS Training
 
-- AWS Digital (online) and Classroom Training (in-person or virtual)
-- AWS Private Training (for your organization)
-- Training and Certification for the U.S Government
-- Training and Certification for the Enterprise
-- AWS Academy: helps universities teach AWS
-- And your favorite online teacher... 
-  teaching you all about AWS Certifications and more!
+- We have different types of training given directly by AWS:
+  - AWS Digital (online) 
+  - Classroom Training (in-person or virtual)
+  - AWS Private Training (for your organization)
+  - Training and Certification for the U.S Government
+  - Training and Certification for the Enterprise
+- AWS Academy: to help universities teach AWS for people who get their university degree, also know how to use the cloud
+- And your favorite online teacher teaching you all about AWS Certifications and more!
 
 ## AWS Professional Services & Partner Network
 
-- The AWS Professional Services organization is a global team of experts
-- They work alongside your team and a chosen member of the APN
-- APN = AWS Partner Network
-- **APN Technology Partners:** providing hardware, connectivity, and software
-- **APN Consulting Partners:** professional services firm to help build on AWS
-- **APN Training Partners:** find who can help you learn AWS
-- **AWS Competency Program:** AWS Competencies are granted to APN Partners who have demonstrated technical proficiency and proven customer success in specialized solution areas.
-- **AWS Navigate Program:** help Partners become better Partners
+- The AWS Professional Services organization is a global team of experts who can help you with AWS
+- They work alongside your team (your people handling AWS) and a chosen member of the APN
+- APN = AWS Partner Network - It is a network of people that AWS knows are good with the cloud
+  - **APN Technology Partners:** providing hardware, connectivity, and software
+  - **APN Consulting Partners:** professional services firm to help build on AWS
+  - **APN Training Partners:** people who can help you learn AWS. They will be able to deliver AWS Training mentioned before
+  - **AWS Competency Program:** AWS Competencies are granted to APN Partners who have demonstrated technical proficiency and proven customer success in specialized solution areas
+  - **AWS Navigate Program:** help Partners become better Partners (to train the partners)
 
 ## AWS IQ
 
 - Quickly find professional help for your AWS projects
-- Engage and pay AWS Certified 3rd party experts for on-demand project work
-- Video-conferencing, contract management, secure collaboration, integrated billing
-- **For Customers**
+- Engage and pay AWS Certified 3rd party experts for on-demand project work. You use IQ to engage and pay them
+- IQ provides you with video-conferencing, contract management, secure collaboration, integrated billing
+- **For Customers of AWS IQ**
 
   ![AWS IQ CUSTOMERS](../images/AWS_IQ_Customers.PNG)
+
+  - You are going to submit a request to describe your project, and then it is like a freelancer platform
+  - You are going to review your responses and going to connect to experts based on requirements, timelines, and so on
+  - Once you have shortlisted everyone, you can select an expert, for example, based on rates, experience and so on
+  - And then you can work securely with that expert by giving him/her access securely to your AWS accounts
+  - Finally, once you are happy with the work being delivered, you can unlock milestones and then the milestones will be charged directly into your AWS bill
 
 - **For Experts**
 
   ![AWS IQ EXPERTS](../images/AWS_IQ_Experts.PNG)
 
+  - If you are an expert, then you would create your profile
+  - Then you connect with customers
+  - Then you start a proposal
+  - If it is accepted, then you work securely, and 
+  - You get paid after the milestones are unlocked
+
 ## AWS re:Post
 
-- **AWS-managed Q&A service** offering crowd-sourced, expert-reviewed answers to your technical questions about AWS that replaces the original AWS Forums
-- Part of the AWS Free Tier
-- Community members can earn reputation points to build up their community expert status by providing accepted answers and reviewing answers from other users
+- The other option to get help is to use AWS re:Post
+- This is actually a community forum in which you find your answers, you answer questions, you will find best practices or you can join groups.
 
   ![AWS REPOST](../images/AWS_rePost.PNG)
 
+- **AWS-managed Q&A service** offering crowd-sourced, expert-reviewed answers to your technical questions about AWS and that replaces what used to be the original AWS Forums. It looks like StackOverflow, someone asks a question and then you get answers, some of them can be upvoted, some of them can be accepted, and they are reviewed by experts all the time
+- It is part of the AWS Free Tier, so it does not cost you anything to access it
+- If you are a community member, you can earn reputation points to build up their community expert status by providing accepted answers and reviewing answers from other users
 - **Questions from AWS Premium Support customers that do not receive a response from the community are passed on to AWS Support engineers**
-- AWS re:Post is not intended to be used for questions that are time-sensitive or involve any proprietary information
+- AWS re:Post is not intended to be used for questions that are time-sensitive or involve any proprietary information. That means, if you need a help right now, re:Post is not for you
 
 ### AWS re:Post - Knowledge Center
 
-- Contains the most frequent & common questions and requests
+- Part of AWS re:Post portal
+- A place where you can find the most frequent & common questions, requests, and best practices on AWS
+- It has a lot of different categories shown in the diagram
+- You can find more information you can find it on [Knowledge Center](https:/repost.aws/knowledge-center/all) portal
 
   ![AWS REPOST KNOWLEDGE CENTER](../images/AWS_rePost_KnowledgeCenter.PNG)
 
 ## AWS Managed Services (AMS)
 
-- Provides infrastructure and application support on AWS.
+- This is a bit weird as many of the services on AWS, for example, RDS and others are managed services, but AWS Managed Services are actually a team of people who are going to provide you infrastructure and application support on AWS
 - **AMS offers a team of AWS experts** who manage and operate your infrastructure for security, reliability, and availability
 - Helps organizations offload routine management tasks and focus on their business objectives.
-- Fully managed service, so AWS handles common activities such as change requests, monitoring, patch management, security, and backup services
-- Implements best practices and maintains your AWS infrastructure to reduce your operational overhead and risk
-- AMS business hours are 24/365
+- It is a fully managed service and AWS is going to handle many common activities such as change requests, monitoring, patch management, security, and backup services
+- They will implement best practices and maintains your AWS infrastructure to reduce your operational overhead and risk
+- AMS business hours are 24/7 and 365 days a year and they really help you to get started with the cloud and worry about other things and how to run the cloud itself
 
   ![AWS MANAGED SERVICES](../images/AWS_ManagedServices.PNG)
+
+- To summarize, the managed services of AWS enable you to create a baseline, then you can sustain, build or migrate. They will help you operate your infrastructure in the cloud
+- So this is not a service which you can do from the console directly, rather you have to contact the sales of AWS who will get in touch with you and help you.
+- Thanks to AWS Managed Services benefits, you will get improved security, focus on automation, stronger compliance, reduced operating costs as you are dealing with experts, simplified management, and frictionless innovation
