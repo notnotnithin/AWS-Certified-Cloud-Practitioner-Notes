@@ -3,7 +3,10 @@
 - [Account Management, Billing \& Support](#account-management-billing--support)
   - [AWS Organizations](#aws-organizations)
   - [Multi Account Strategies](#multi-account-strategies)
+  - [Organizational Units (OU) - Examples](#organizational-units-ou---examples)
+  - [AWS Organization](#aws-organization)
   - [Service Control Policies (SCP)](#service-control-policies-scp)
+    - [SCP Examples - Blacklist and Whitelist strategies](#scp-examples---blacklist-and-whitelist-strategies)
   - [AWS Organization - Consolidated Billing](#aws-organization---consolidated-billing)
   - [AWS Control Tower](#aws-control-tower)
   - [AWS Resource Access Manager (AWS RAM)](#aws-resource-access-manager-aws-ram)
@@ -46,19 +49,23 @@
 - Allows to manage **multiple AWS accounts**
 - The main account is the master account
 - Cost Benefits:
-  - Consolidated Billing across all accounts - single payment method
-  - Pricing benefits from aggregated usage (volume discount for EC2, S3…)
-  - Pooling of Reserved EC2 instances for optimal savings
+  - **Consolidated Billing** across all accounts - single payment method
+  - Pricing benefits from **aggregated usage** (volume discount for EC2, S3…)
+  - **Pooling of Reserved EC2 instances** for optimal savings
 - API is available to **automate AWS account creation**
-- Restrict account privileges using Service Control Policies (SCP)
+- **Restrict account privileges using Service Control Policies (SCP)**
 
 ## Multi Account Strategies
 
-- Create accounts per **department**, per **cost center**, per **dev / test / prod**, based on regulatory restrictions (using SCP), for better resource isolation (ex: VPC), to have separate per-account service limits, isolated account for logging
+- Create accounts per **department**, per **cost center**, per **dev / test / prod**, based on **regulatory restrictions** (using SCP), for **better resource isolation** (ex: VPC), to have **separate per-account service limits**, isolated account for **logging**
 - Multi Account vs One Account Multi VPC
 - Use tagging standards for billing purposes
 - Enable CloudTrail on all accounts, send logs to central S3 account
 - Send CloudWatch Logs to central logging account
+
+## Organizational Units (OU) - Examples
+
+## AWS Organization
 
 ## Service Control Policies (SCP)
 
@@ -72,6 +79,10 @@
 - Use cases:
   - Restrict access to certain services (for example: can’t use EMR)
   - Enforce PCI compliance by explicitly disabling services
+
+### SCP Examples - Blacklist and Whitelist strategies
+
+  
 
 ## AWS Organization - Consolidated Billing
 
