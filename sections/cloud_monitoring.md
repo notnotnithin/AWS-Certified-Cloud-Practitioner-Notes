@@ -31,11 +31,12 @@
 
 ### Example: CloudWatch Billing Metric
 
-**Key Features:**
+  ![CLOUD WATCH BILLING METRIC](../images/CloudWatch_Billing_metric.PNG)
 
-- Collect and track metrics.
-- Set alarms and take automated actions.
-- Store and access logs for troubleshooting.
+**Key Features:**
+  - Collect and track metrics.
+  - Set alarms and take automated actions.
+  - Store and access logs for troubleshooting.
 
 ### Important Metrics
 
@@ -55,7 +56,7 @@
 - Alarms are used to trigger notifications for any metric
 - Alarms actions...
   - **Auto Scaling:** increase or decrease EC2 instances “desired” count
-  - **EC2 Actions:** stop, terminate, reboot or recover an EC2 instance
+  - **EC2 Actions:** stop, terminate, reboot or **recover an EC2 instance**
   - **SNS notifications:** send a notification into an SNS topic
 - Various options (sampling, %, max, min, etc...)
 - Can choose the period on which to evaluate an alarm
@@ -85,12 +86,14 @@
 
 ## Amazon EventBridge (formerly CloudWatch Events)
 
-- Delivers a stream of system events describing changes in AWS resources.
-- Example: Trigger a Lambda function when an EC2 instance state changes.
 - Schedule: Cron jobs (scheduled scripts)
-  - Schedule Every hour => Trigger script on Lambda function
+
+  ![EVENT BRIDGE CRON JOBS](../images/EventBridge_Cron_Jobs.PNG)
+
 - Event Pattern: Event rules to react to a service doing something
-  - IAM Root User Sign in Event => SNS Topic with Email Notification
+  
+  ![EVENT BRIDGE EVENT PATTERN](../images/EventBridge_EventPattern.PNG)
+
 - Trigger Lambda functions, send SQS/SNS messages
 
 ### Amazon EventBridge Rules
@@ -101,13 +104,13 @@
 
   ![EVENT BRIDGE EVENT BUS](../images/Amazon_EventBridge_EventBus.PNG)
 
-- Schema Registry: model event schema
-- You can archive events (all/filter) sent to an event bus (indefinitely or set period)
-- Ability to replay archived events
+- **Schema Registry:** model event schema
+- You can **archive events** (all/filter) sent to an event bus (indefinitely or set period)
+- Ability to **replay archived events**
 
 ## AWS CloudTrail
 
-- Provides governance, compliance and audit for your AWS Account
+- **Provides governance, compliance and audit for your AWS Account**
 - CloudTrail is enabled by default!
 - Get an **history of events / API calls made within your AWS Account** by:
   - Console
@@ -117,11 +120,6 @@
 - Can put logs from CloudTrail into CloudWatch Logs or S3
 - **A trail can be applied to All Regions (default) or a single Region.**
 - If a resource is deleted in AWS, investigate CloudTrail first!
-
-**Key Features:**
-
-- Logs API calls across AWS services, including CLI, SDK, and Management Console.
-- Tracks who made the call, when, and from where.
 
 ### CloudTrail Diagram
 
