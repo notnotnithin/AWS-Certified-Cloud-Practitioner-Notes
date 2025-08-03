@@ -53,7 +53,7 @@
 ### Amazon CloudWatch Alarms
 
 - Alarms are used to trigger notifications for any metric
-- Alarms actions…
+- Alarms actions...
   - **Auto Scaling:** increase or decrease EC2 instances “desired” count
   - **EC2 Actions:** stop, terminate, reboot or recover an EC2 instance
   - **SNS notifications:** send a notification into an SNS topic
@@ -217,7 +217,7 @@
 - **CloudWatch:**
   - **Metrics:** monitor the performance of AWS services and billing metrics
   - **Alarms:** automate notification, perform EC2 action, notify to SNS based on metric
-  - **Logs:** collect log files from EC2 instances, servers, Lambda functions…
+  - **Logs:** collect log files from EC2 instances, servers, Lambda functions...
   - **Events (or EventBridge):** react to events in AWS, or trigger a rule on a schedule
 - **CloudTrail:** audit API calls made within your AWS account
 - **CloudTrail Insights:** automated analysis of your CloudTrail Events
