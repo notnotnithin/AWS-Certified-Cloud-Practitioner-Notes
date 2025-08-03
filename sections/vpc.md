@@ -132,7 +132,7 @@
   ![AWS PRIVATELINK](../images/AWS_PrivateLink.PNG)
 
 - Most secure & scalable way to expose a service to 1000s of VPCs
-- Does not require VPC peering, internet gateway, NAT, route tables…
+- Does not require VPC peering, internet gateway, NAT, route tables...
 - Requires a network load balancer (Service VPC) and ENI (Customer VPC)
 
 ## Site to Site VPN & Direct Connect
