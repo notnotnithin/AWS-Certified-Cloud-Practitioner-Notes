@@ -1,6 +1,6 @@
-# Deploying and Managing Infrastructure at Scale
+# Deployments and Managing Infrastructure at Scale
 
-- [Deploying and Managing Infrastructure at Scale](#deploying-and-managing-infrastructure-at-scale)
+- [Deployments and Managing Infrastructure at Scale](#deployments-and-managing-infrastructure-at-scale)
   - [What is CloudFormation?](#what-is-cloudformation)
     - [Benefits of AWS CloudFormation](#benefits-of-aws-cloudformation)
     - [CloudFormation + Infrastructure Composer](#cloudformation--infrastructure-composer)
