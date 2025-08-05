@@ -49,21 +49,21 @@
 
 ## AWS Organizations
 
-- Global service
-- Allows to manage **multiple AWS accounts**
-- The main account is the master account
-- Cost Benefits:
-  - **Consolidated Billing** across all accounts - single payment method
-  - Pricing benefits from **aggregated usage** (volume discount for EC2, S3…)
-  - **Pooling of Reserved EC2 instances** for optimal savings
-- API is available to **automate AWS account creation**
+- It is a global service
+- The idea is that by creating an organization, you are able to manage **multiple AWS accounts**
+- The main account is the Master Account and all the other ones will be called Child Accounts
+- Cost Benefits you get from using an organization:
+  - **Consolidated Billing** across all accounts - single payment method. You don't need to set up a payment method for all the other accounts
+  - Pricing benefits from **aggregated usage** (volume discount for EC2, S3…). When you use a lot EC2 or when you use a lot S3, you get a discount because you've used that a lot. And so if you have multiple accounts, you could lose that volume. But with an organization, because the billing is consolidated, the aggregated usage is as well consolidated, and that means that you get more discounts
+  - **Pooling of Reserved EC2 instances** for optimal savings. They're shared across all the accounts to make sure that if one account does not use a Reserve Instance, another one can, and again, maximize the cost savings.
+- API is available to **automate AWS account creation**. For example, if you had some processes to create an account programmatically for someone, i.e., Sandbox Accounts
 - **Restrict account privileges using Service Control Policies (SCP)**
 
 ## Multi Account Strategies
 
-- Create accounts per **department**, per **cost center**, per **dev / test / prod**, based on **regulatory restrictions** (using SCP), for **better resource isolation** (ex: VPC), to have **separate per-account service limits**, isolated account for **logging**
-- Multi Account vs One Account Multi VPC
-- Use tagging standards for billing purposes
+- You can have a Multi Account Strategy in AWS. That means that you wanna create accounts, for example, **per department**, **per cost center**, **per environment, for example, dev/test/and prod** based on **regulatory restrictions**. For example, if you don't want a service to be used in an account, you can use an SCP. Or if you want to **isolate the resources better**, you could have different VPC in different accounts. And it's also very good to have **separate per-account service limits** and also isolated accounts for **logging**. All these could be multi-account strategies, it's really up to each organization to choose what type of accounts they want
+- The idea is that you have two options, you can use Multi Account or One Account and Multiple VPC. That is a trade off, personally prefer Multi Account better
+- You can use tagging standards across all the accounts for billing purposes
 - Enable CloudTrail on all accounts, send logs to central S3 account
 - Send CloudWatch Logs to central logging account
 
@@ -71,77 +71,86 @@
 
   ![OU EXAMPLE](../images/OU_Examples.PNG)
 
+- How can you organize your accounts? Well, you can organize them by Business Units, for example, with a Master Account. And then we have the Sales OU, we have the Retail OU and the Finance OU. And within each OU, so each Organizational Unit, you'll have multiple accounts or you can organize them by environment, production, development and tests. Or we can have them Project-based, for example, Project-1, Project-2, Project-3, or a mix of all these things
+
 ## AWS Organization
 
   ![AWS ORGANIZATION](../images/AWS_Organization.PNG)
 
+- From the diagram, the Root OU contains everything, it contains the Master Accounts, and then you can create different OU. The Dev OU maybe with the two accounts in it, the Prod OU with two accounts in it, and within the Prod OU, you can also have different OU. A Finance OU and an HR OU with their respective accounts
+  
 ## Service Control Policies (SCP)
 
-- Whitelist or blacklist IAM actions
-- Applied at the **OU** or **Account** level
-- Does not apply to the Master Account
-- SCP is applied to all the **Users and Roles** of the Account, including Root user
-- The SCP does not affect service-linked roles
-  - Service-linked roles enable other AWS services to integrate with AWS Organizations and can't be restricted by SCPs.
-- SCP must have an explicit Allow (does not allow anything by default)
-- Use cases:
-  - Restrict access to certain services (for example: can't use EMR)
-  - Enforce PCI compliance by explicitly disabling services
+- There is something called a Service Control Policy or SCP. It allows you to whitelist or blacklist IAM actions applied at the **OU** or **Account** level, but it doesn't apply to the Master Account. The SCPs have no effects on the Master Account
+- The SCPs can be applied to only the **Users and the Roles** of the Account, including a Root. If you apply an SCP onto your account within an OU and you say you cannot use EC2, even an admin within an account cannot use EC2. 
+- But the SCP does not apply to service-linked roles. 
+  - This is the service roles that other AWS services use to integrate with AWS organizations and can't be restricted by SCPs
+- SCP must have an explicit Allow to allow things. So by default it does not allow anything.
+- The use cases for SCP, and this is what the exam will test you on, would be to 
+  - restrict access to certain services. For example, you're saying, "Okay, in my production accounts, you cannot use EMR"
+  - or to enforce PCI Compliance by explicitly disabling services that are not compliant with PCI yet in AWS
 
 ### SCP Examples - Blacklist and Whitelist strategies
 
-  ![SCP BLACKLIST WHITELIST STRATEGIES](../images/SCP_Blacklist_Whitelist_Strategies.PNG)  
+  ![SCP BLACKLIST WHITELIST STRATEGIES](../images/SCP_Blacklist_Whitelist_Strategies.PNG)
+
+- Let's look at example 1. An SCP looks just like a IAM Policy. So this is Allow all actions. So we allow STAR on STAR. So do you say you can do anything but DenyDynamoDB. And we're saying the effect is Deny on DynamoDB Star for any resource
+- Let's look at example 2. This is another strategy to whitelist only a certain type of services. We're saying allow EC2 star and CloudWatch star on Resource Star, but any other services but EC2 and CloudWatch, cannot be usable. If you don't know exactly what this means, you want more examples, there's a link right here that takes you to the documentation and shows you different OUs and SCPs you can have
 
 ## AWS Organization - Consolidated Billing
 
+- When you enable this setting, this provides you two things. 
+  - Number one, it gives you the **combined usage**, that means that you can combine all the usage of all accounts together to do two things. Number one, you're going to **share the volume pricing**. For example, in Amazon history, if you go over maybe five terabytes of data, then the next service is going to be cheaper. Well, obviously if you combine all your accounts together, if every account is using one terabyte of data and you have six accounts, then altogether they will be benefiting from the discount pricing. So, the combined usage is very important, and also, there are some **Reserved Instances or Savings Plan discounts** on one account. They can be shared across all accounts again to maximize the discounts and the savings
+  - One Bill. You get one bill for all the accounts in the organization, which really can help your accounting departments and allow you not to be restricted in how many accounts you can create for AWS
+
   ![AWS ORGANIZATION CONSOLIDATED BILLING](../images/AWS_Organization_Consolidated_Billing.PNG)
 
-- When enabled, provides you with:
-  - **Combined Usage** – combine the usage across all AWS accounts in the AWS Organization to **share the volume pricing, Reserved Instances and Savings Plans discounts**
-  - One Bill – get one bill for all AWS Accounts in the AWS Organization
-- The management account can turn off Reserved Instances discount sharing for any account in the AWS Organization, including itself
+  - Let's take an example, Reserved Instance Sharing. We have an organization with two accounts and in the first one, account A, there is no Reserved Instances, and account B, there are five reserved EC2 instances. Now, let's assume that we are within one AZ because Reserve Instances are at the AZ level and we have nine EC2 instances. As you can see, three are launched in account B, and six are launched in account A. Now, what is going to happen? Well, if we have five EC2 Reserved Instances on account B, then the three EC2 instances obviously are going to be reserved, but because we have enabled Reserved Instances sharing, then two instances in account A will also benefit from Reserved Instances pricing and therefore resulting in cost savings. At the end of the day, we have five Reserved Instances and four non-Reserved Instances in this use case even though Susan in account B only launched three EC2 instances out of the five that were reserved
+- Finally, the Reserved Instances discount sharing can be turned off for any accounts in the organization, including the management accounts, the main accounts of your organization
 
 ## AWS Control Tower
 
-- Easy way to **set up and govern a secure and compliant multi-account AWS environment** based on best practices
-- Benefits:
-  - Automate the set up of your environment in a few clicks
-  - Automate ongoing policy management using guardrails
-  - Detect policy violations and remediate them
-  - Monitor compliance through an interactive dashboard
+- It is for you an easy way to **set up and govern a secure and compliant, multi account, AWS environment** based on best practices.Instead of doing everything manually creating an organization and so on and then applying security practices, we have Control Tower where you can, with a few clicks, creates a multi account, AWS environment
+- The benefits is that:
+  - You can automate the setup of your environments in a few clicks
+  - You can automate ongoing policy management using guardrails
+  - You can detect the policy violations and remediate them
+  - You can monitor your compliance through an interactive dashboard
 - AWS Control Tower runs on top of AWS Organizations:
-  - It automatically sets up AWS Organizations to organize accounts and implement SCPs (Service Control Policies)
+  - That means that it will automatically set up organizations for you to organize your accounts, and it will implement Service Control Policies (SCP) to make sure that the guardrails are operating effectively
 
 ## AWS Resource Access Manager (AWS RAM)
 
+- The idea is that you can share AWS resources with other AWS accounts, with resources that are owned by your accounts
+- And this can be any other accounts or accounts within your organization
+- This allows you to avoid resource duplication 
+- And the supported resources include Aurora databases, VPC Subnets, Transit Gateway, Route 53, EC2 Dedicated Hosts, License Manager Configurations. Now, you don't remember these resources in particular, but just the idea behind RAM service
+
   ![AWS RESOURCE ACCESS MANAGER](../images/AWS_Resource_Access_Manager.PNG)
 
-- Share AWS resources that you own with other AWS accounts
-- Share with any account or within your Organization
-- Avoid resource duplication!
-- Supported resources include Aurora, VPC Subnets, Transit Gateway, Route 53, EC2 Dedicated Hosts, License Manager Configurations.
+- Let's say we have a cloud accounts and we have a VPC within the cloud accounts and within the VPC, there are private subnets. Now, we can actually share this VPC with other accounts, such as Account one and Account two which are different accounts, still have access to the same VPC and the same subnets. The result of this is that, for example, if an account decides to create EC2 instances and the load balancer within your VPC Account two, with their own EC2 instances, can access directly from the network, for example an Amazon RDS database, or your application load balancer. So, the idea here is that because we've shared our VPC, all the resources within the VPC are going to be able to connect with each other from a network perspective, which is going to simplify our deployments
 
 ## AWS Service Catalog
 
-  ![AWS SERVICE CATALOG](../images/service_catalog.png)
-
-- Users that are new to AWS have too many options, and may create stacks that are not compliant or in line with the rest of the organization
-- Some users just want a quick **self-service portal** to launch a set of **authorized products** pre-defined **by admins**
-- Includes: virtual machines, databases, storage options, etc…
-- Enter AWS Service Catalog!
+- The users that are new to AWS, they have too many options and they don't follow this course, for example when they get started. If you leave them the option to do anything they want in AWS, whatever they create may not be in line with what the rest of your organization is doing. 
+- Some users that just want to have access to quick self-service portal that allows them to launch a set of authorized products, and these have to be predefined by admins. 
+- As you can see, these could include virtual machines, databases, storage options, and so on. 
+- To do so, to have this self-service portal, you use the AWS Service Catalog!
 
 ### Service Catalog Diagram
 
   ![SERVICE CATALOG DIAGRAM](../images/Service_Catalog_Diagram.PNG)
 
+- So very simply, **as an admin** in AWS and Service Catalog, you're going to create products. And products are just CloudFormation templates with the proper parameters. And you can include them in a portfolio, and a portfolio is a collection of products. And then you define who has access to launching what products within my portfolio
+- And then **as a user**, you log in to your portal on Service Catalog and you have a quick list of all the products that you can use because of your permissions. And then the users can launch these products and automatically they get provisioned by CloudFormation. But we know that they've been properly configured, properly tagged, and that they respect the way our organization is supposed to work. Say for example,that a user wants to have access to a quick RDS database but doesn't know how to create one properly. Then you could offer this as a service from within the Service Catalog
+
 ## Pricing Models in AWS
 
-- AWS has 4 pricing models:
-- **Pay as you go**: pay for what you use, remain agile, responsive, meet scale demands
-- **Save when you reserve**: minimize risks, predictably manage budgets, comply with long-terms requirements
-  - Reservations are available for EC2 Reserved Instances, DynamoDB Reserved Capacity, ElastiCache Reserved Nodes, RDS Reserved Instance, Redshift Reserved Nodes
-- **Pay less by using more**: volume-based discounts
-- **Pay less as AWS grows**
+- AWS has 4 different pricing models
+- **Pay as you go** where you pay for what you use. You remain agile, because you can start and stop and delete resources whenever you want, responsive, and you can scale to meet demands as demand happens
+- There's also a model where you **save when you reserve**. So this is to minimize risk and to get a predictable budget and to comply with long-term requirements. For example, we can do instance reservations for EC2, DynamoDB Reserved Capacity, ElastiCache Reserved Nodes, RDS Reserved instance, and Redshift Reserved Nodes
+- Also, you get to **pay less by using more**. You get volume-based discounts, for example, on Amazon S3
+- And as **AWS grows their infrastructure**, they will have some cost savings, and they will pass them onto you so you **pay less**. AWS is very famous for doing cost reductions every month or every year, which is really good, because as their infrastructure grow, and more people use AWS, they have volume and scale, and therefore, they will pass on that economy of scale onto you to get discounts
 
 ## Free services & free tier in AWS
 
@@ -153,7 +162,7 @@
 - Auto Scaling Groups - You do pay for the resources created
 - Free Tier: https://aws.amazon.com/free/
   - EC2 t2.micro instance for a year
-  - S3, EBS, ELB, AWS Data transfer
+  - S3, EBS, ELB, AWS Data transfer for free up to a certain amounts.
 
 ## Compute Pricing
 
@@ -256,6 +265,9 @@
 
 - Use Private IP instead of Public IP for good savings and better network performance
 - Use same AZ for maximum savings (at the cost of high availability)
+- Through internet it will be costly between 2 Ec2 instance between 2 Availability Zones
+- Recommended to use a private IP between 2 Availability Zones.
+- Inter region will be costlier
 
 ## Savings Plan
 
@@ -308,14 +320,20 @@
 
 - Available at <https://calculator.aws/>
 - Estimate the cost for your solution architecture
+- select services -> ram -> os -> hours to get the estimated price at last.
 
 ## AWS Billing Dashboard
 
   ![AWS BILLING DASHBOARD](../images/AWS_Billing_Dashboard.PNG)
+  
+- High level tool to get overview of what is happening.
 
 ## AWS Free Tier Dashboard
 
   ![AWS FREE TIER DASHBOARD](../images/AWS_Free_Tier_Dashboard.PNG)
+
+- month to month date and cost and forecast
+- free tier limits can be seen aswell.
 
 ## Cost Allocation Tags
 
@@ -356,7 +374,7 @@
 - Analyze your data at a high level: total costs and usage across all accounts
 - Or Monthly, hourly, resource level granularity
 - Choose an optimal **Savings Plan**(to lower prices on your bill)
-- **Forecast usage up to 12 months based on previous usage**
+- **Forecast usage up to 12 months based on previous usage** - exam question
 
   ![MONTHLY COST EXPLORER](../images/Cost_Explorer_Monthly_Cost_By_AWS_Service.PNG)
 
@@ -373,6 +391,7 @@
   ![FORECAST USAGE](../images/CostExplorer_ForecastUsage.PNG)
 
 - Cost Explorer – Forecast Usage
+- data export -> name -> columns to export -> decide on granularity and then export it to parquet to csv -> s3 bucket the report can go to
 
 ## Billing Alarms in CloudWatch
 
@@ -386,7 +405,7 @@
 ## AWS Budgets
 
 - Create budget and **send alarms when costs exceeds the budget**
-- 3 types of budgets: Usage, Cost, Reservation
+- 4 types of budgets: Usage, Cost, Reservation, Savings Plan
 - For Reserved Instances (RI)
   - Track utilization
   - Supports EC2, ElastiCache, RDS, Redshift
