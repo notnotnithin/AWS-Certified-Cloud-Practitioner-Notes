@@ -7,11 +7,11 @@
   - [Amazon S3 Overview - Objects](#amazon-s3-overview---objects)
   - [Amazon S3 - Security](#amazon-s3---security)
   - [S3 Bucket Policies](#s3-bucket-policies)
-  - [Example: Public Access - Use Bucket Policy](#example-public-access---use-bucket-policy)
-  - [Example: User Access to S3 - IAM permissions](#example-user-access-to-s3---iam-permissions)
-  - [Example: EC2 instance access - Use IAM Roles](#example-ec2-instance-access---use-iam-roles)
-  - [Example: Advanced: Cross-Account Access - Use Bucket Policy](#example-advanced-cross-account-access---use-bucket-policy)
-  - [Example: Bucket Settings for Block Public Access](#example-bucket-settings-for-block-public-access)
+    - [Example: Public Access - Use Bucket Policy](#example-public-access---use-bucket-policy)
+    - [Example: User Access to S3 - IAM permissions](#example-user-access-to-s3---iam-permissions)
+    - [Example: EC2 instance access - Use IAM Roles](#example-ec2-instance-access---use-iam-roles)
+    - [Example: Advanced: Cross-Account Access - Use Bucket Policy](#example-advanced-cross-account-access---use-bucket-policy)
+    - [Example: Bucket Settings for Block Public Access](#example-bucket-settings-for-block-public-access)
   - [S3 - Static Website Hosting](#s3---static-website-hosting)
   - [S3 - Versioning](#s3---versioning)
   - [S3 Replication (CRR \& SRR)](#s3-replication-crr--srr)
@@ -76,7 +76,7 @@
 - Amazon S3 allows people to store objects (files) in "buckets" (directories)
 - Buckets must have a **globally unique name (across all regions you have in your accounts, but also all the accounts that exist out there on AWS)**
 - Buckets must be defined in a specific **region** even though the name of the bucket is unique across all regions and all the accounts
-- S3 looks like a global service but buckets are created in a region
+- **S3 looks like a global service but buckets are created in a region**
 - Naming convention
   - No uppercase
   - No underscore
@@ -106,7 +106,7 @@
 ## Amazon S3 - Security
 
 - **User based**
-  - IAM policies - As a user ou can have IAM policies attached to you and the IAM policies will authorize which API calls should be allowed for a specific user from IAM console
+  - IAM policies - As a user you can have IAM policies attached to you and the IAM policies will authorize which API calls should be allowed for a specific user from IAM console
 - **Resource Based**
   - **Bucket Policies** - they are the most common way of to do security and we can assign bucket wide rules directly from the S3 console. This allow a specific user to come in or allow a user from another account to access your S3 buckets. This is how you can make your **S3 buckets public**
   - **Object Access Control List (ACL)** – they are finer grain security and they can be disabled
@@ -147,34 +147,34 @@
 }
 ```
 
-## Example: Public Access - Use Bucket Policy
+### Example: Public Access - Use Bucket Policy
 
 - We have a user on the internet who wants to access our S3 buckets.
 - We will attach an S3 bucket policy that allows public access then the user can access any objects within it.
 
   ![PUBLIC ACCESS BUCKET POLICY](../images/PublicAccess_UseBucketPolicy.PNG)
 
-## Example: User Access to S3 - IAM permissions
+### Example: User Access to S3 - IAM permissions
 
 - If you have an IAM user within your account and he wants to access S3 bucket, then we can assign IAM permissions to that user through a policy. Therefore because the policy allows access to the S3 buckets then the user can access our S3 buckets.
 
   ![USER ACCESS TO S3 IAM PERMISSIONS](../images/UserAccessToS3_IAMPermissions.PNG)
 
-## Example: EC2 instance access - Use IAM Roles
+### Example: EC2 instance access - Use IAM Roles
 
 - If you have an EC2 instance and want to give access from the EC2 instance into the S3 buckets, we have seen that IAM users are not appropriate, we need to use IAM roles instead.
 - We create an EC2 instance role with the correct IAM permissions then EC2 instance will be able to access Amazon S3 buckets.
 
   ![EC2 INSTANCE ACCESS USE IAM ROLES](../images/EC2InstanceAccess_UseIAMRoles.PNG)
 
-## Example: Advanced: Cross-Account Access - Use Bucket Policy
+### Example: Advanced: Cross-Account Access - Use Bucket Policy
 
 - More advanced, if you want to allow Cross-Account access, then you must use a bucket policy.
 - We have an IAM user in another AWS account, we create an S3 bucket policy that allows Cross-Account access for that specific IAM user therefore the IAM user will be able to make API calls into our S3 buckets.
 
   ![ADVANCE CROSS ACCOUNT ACCESS](../images/Advanced_CrossAccountAccess_UseBucketPolicy.PNG)
 
-## Example: Bucket Settings for Block Public Access
+### Example: Bucket Settings for Block Public Access
 
 - Other security settings that you need to know about is that there is the bucket settings for Block Public Access
 - We set the values to "On" when we created the buckets
