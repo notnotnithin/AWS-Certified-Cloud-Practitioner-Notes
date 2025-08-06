@@ -19,8 +19,8 @@
 
 ## Scalability & High Availability
 
-- **Scalability**: Ability of a system to handle an increase in load by adapting to the demand.
-- **High Availability**: Ensures a system is operational and accessible for a high percentage of time, often achieved by reducing the impact of failures.
+- **Scalability**: Ability of a system to handle an increase in load by adapting to the demand
+- **High Availability**: Ensures a system is operational and accessible for a high percentage of time, often achieved by reducing the impact of failures
 - There are **two kinds** of scalability:
   - Vertical Scalability
   - Horizontal Scalability (= elasticity)
@@ -29,15 +29,15 @@
 ## Vertical Scalability
 
 - Vertical Scalability means increasing the size of the instance
-• For example, your application runs on a t2.micro
-• Scaling that application vertically means running it on a t2.large
-• Vertical scalability is very common for non distributed systems, such as a database.
-• There's usually a limit to how much you can vertically scale (hardware limit)
+- For example, your application runs on a t2.micro
+- Scaling that application vertically means running it on a t2.large
+- Vertical scalability is very common for non-distributed systems, such as a database
+- There's usually a limit to how much you can vertically scale (hardware limit)
 
 ## Horizontal Scalability
 
 - Horizontal Scalability means increasing the number of instances / systems for your application
-- Horizontal scaling implies distributed systems.
+- Horizontal scaling implies distributed systems
 - This is very common for web applications / modern applications
 - It's easy to horizontally scale thanks the cloud offerings such as Amazon EC2
 
@@ -69,7 +69,7 @@
 
 ## What is Load Balancing?
 
-- Load balancers are servers that forward internet traffic to multiple servers (EC2 Instances) downstream.
+- Load balancers are servers that forward internet traffic to multiple servers (EC2 Instances) downstream
 
   ![Load Balancing](../images/Load_Balancing.PNG)
 
@@ -97,11 +97,11 @@
 
 #### Types of ELB
 
-1. **Application Load Balancer (ALB)**: For HTTP and HTTPS traffic, operates at Layer 7 (application level).
+1. **Application Load Balancer (ALB)**: For HTTP and HTTPS traffic, operates at Layer 7 (application level)
 
   ![ALB](../images/ALB.PNG)
 
-2. **Network Load Balancer (NLB)**: Handles high-performance traffic at Layer 4 (transport level).
+2. **Network Load Balancer (NLB)**: Handles high-performance traffic at Layer 4 (transport level)
 
   ![NLB](../images/NLB.PNG)
 
@@ -109,7 +109,7 @@
 
   ![GWLB](../images/GWLB.PNG)
 
-4. **Classic Load Balancer**: (retired in 2023) – Layer 4 & 7. This was replaced by ALB and NLB.
+4. **Classic Load Balancer**: (retired in 2023) – Layer 4 & 7. This was replaced by ALB and NLB
 
 ## What's an Auto Scaling Group?
 
@@ -133,8 +133,8 @@
 
 ### Auto Scaling Group Scaling Strategies
 
-- **Manual Scaling**: Adjusting the number of instances manually based on load prediction.
-- **Dynamic Scaling**: Automatically adjusts the number of instances based on demand (e.g., CPU usage).
+- **Manual Scaling**: Adjusting the number of instances manually based on load prediction
+- **Dynamic Scaling**: Automatically adjusts the number of instances based on demand (e.g., CPU usage)
   - **Simple / Step Scaling**
     - When a CloudWatch alarm is triggered (example CPU > 70%), then add 2 units
     - When a CloudWatch alarm is triggered (example CPU < 30%), then remove 1
