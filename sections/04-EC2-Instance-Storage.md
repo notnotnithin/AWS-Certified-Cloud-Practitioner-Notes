@@ -11,7 +11,7 @@
     - [AMI Process (from an EC2 instance)](#ami-process-from-an-ec2-instance)
   - [EC2 Image Builder](#ec2-image-builder)
   - [EC2 Instance Store](#ec2-instance-store)
-  - [Local EC2 Instance Store](#local-ec2-instance-store)
+    - [Local EC2 Instance Store](#local-ec2-instance-store)
   - [EFS: Elastic File System](#efs-elastic-file-system)
   - [EBS vs EFS](#ebs-vs-efs)
   - [EFS Infrequent Access (EFS-IA)](#efs-infrequent-access-efs-ia)
@@ -92,7 +92,7 @@ to your instances while they run
 - AMI is what powers our EC2 instances
 - AMI are a **customization** of an EC2 instance
   - In it you may add your own software, configuration, operating system, monitoring...
-  - If we create your own AMI, we are going to get a faster boot / configuration time because all your software is pre-packaged throught the AMI
+  - If we create your own AMI, we are going to get a faster boot / configuration time because all your software is pre-packaged through the AMI
 - AMI are built for a **specific region** (and can be copied across regions)
 - You can launch EC2 instances from:
   - **A Public AMI:** AWS provided
@@ -132,7 +132,7 @@ to your instances while they run
 - In case the underlying server fails, then you will risk to have a data loss because the hardware attached to the EC2 instance will fail as well.
 - Hence backups and replication will be your responsibility
 
-## Local EC2 Instance Store
+### Local EC2 Instance Store
 
 - As you can see the read IOPS and the write IOPS which correspond to how many I/O operations we can do per second, then you can see that some of these random read IOPS and write IOPS can reach 3.3 million or 1.4 million for the most performant one.
 - To put this comparison with EBS Volume of type GP2 for example, you can reach 32000 IOPS which when compared to EC2 Instance Store is very less.
@@ -157,12 +157,12 @@ to your instances while they run
 
 ## EFS Infrequent Access (EFS-IA)
 
-• This **storage class** is cost-optimized for files not accessed every day
-• Up to 92% lower cost compared to EFS Standard
-• EFS will automatically move your files to EFS-IA based on the last time they were accessed
-• Enable EFS-IA with a Lifecycle Policy
-• Example: Assume we have three files in EFS Standard. Say, fourth file in EBS Standard has not been accessed (read or write) for 60 days. Based on the life-cycle policy defined, and you enable EFS-IA, then you are telling it to be moved to EFS-IA storage class which can save you some cost. Next time you access that file, it would be put back into EFS standard storage class
-• This is transparent to the applications accessing EFS and the application need not know from where the file is read.
+- This **storage class** is cost-optimized for files not accessed every day
+- Up to 92% lower cost compared to EFS Standard
+- EFS will automatically move your files to EFS-IA based on the last time they were accessed
+- Enable EFS-IA with a Lifecycle Policy
+- **Example:** Assume we have three files in EFS Standard. Say, fourth file in EBS Standard has not been accessed (read or write) for 60 days. Based on the life-cycle policy defined, and you enable EFS-IA, then you are telling it to be moved to EFS-IA storage class which can save you some cost. Next time you access that file, it would be put back into EFS standard storage class
+- This is transparent to the applications accessing EFS and the application need not know from where the file is read.
 
   ![EFS IA](../images/EFS_IA.PNG)
 
@@ -197,7 +197,7 @@ to your instances while they run
 
 - A fully managed, high-performance, scalable file storage for **High Performance Computing (HPC)**
 - The name Lustre is derived from "Linux" and "cluster"
-- Machine Learning, Analytics, Video Processing, Financial Modeling, …
+- Machine Learning, Analytics, Video Processing, Financial Modeling, ...
 - Scales up to 100s GB/s, millions of IOPS, sub-ms latencies
 
   ![Amazon FSx Lustre](../images/Amazon_FSX_Lustre.PNG)
