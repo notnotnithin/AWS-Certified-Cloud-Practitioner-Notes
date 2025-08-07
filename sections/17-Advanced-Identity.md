@@ -11,7 +11,7 @@
 
 ## AWS STS (Security Token Service)
 
-- Enabled you to create **temporary, limited-privilege credentials** to access your AWS resources.
+- Enables you to create **temporary, limited-privilege credentials** to access your AWS resources.
 - Short-term credentials: you configure expiration period.
 - A user would assume a role, call Security Token Service (STS) and get Temporary Security Credentials.
 - The credentials looks like an **access key, security key** as well as a **session key** which is going to be limited in time.
@@ -27,8 +27,8 @@
 ## Amazon Cognito
 
 - Manages identity for web and mobile application users (potentially millions)
-- Instead of creating IAM users, create users in Cognito. IAM users is for those users who want to access AWS directly.
-- Use Cognito when you are thinking of building a web or mobile application and you want to have a way to manage users on AWS.
+- Instead of creating IAM users, create users in Cognito because IAM users is for those users who want to access AWS directly.
+- Instead use Cognito when you are thinking of building a web or mobile application and you want to have a way to manage users on AWS.
 
   ![Cognito](../images/Cognito.PNG)
 
