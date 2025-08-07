@@ -68,7 +68,7 @@
 - In AWS, the most common records are:
   - if you are mapping a **www.google.com** hostname to an **IP address** say, 12.34.56.78 then it is called an **A record (IPv4)**
   - if you are mapping a **www.google.com** hostname to an **IPv6 address** say, 2001:0db8:85a3:0000:0000:8a2e:0370:7334 then it is called an **AAAA rcord (IPv6)**
-  - if you are mapping a **search.google.com** hostname to another hostname say, **www.google.com** then it is called a **CNAME** because we are mapping a **hostname to hostname**
+  - if you are mapping a **search.google.com** hostname to another hostname say, **www.google.com** then it is called a **CNAME (Canonical Name or nickname or alias)** because we are mapping a **hostname to hostname**
   - if you are mapping a **example.com** hostname to an **AWS resource**, it is a special type of rcord called an **Alias record (ex: ELB, CloudFront, S3, RDS, etc...)**
 - Basically, Route53 will allow us to create a record which will guide us to the instance that has the least latency
 
@@ -78,7 +78,7 @@
 - We have a web browser and an application server that we have deployed that has a public IPv4
 - We want to be able to access our application server using a normal URL
 - For this, we go into Route53 and create an A record so that when the web browser does a DNS request for **myapp.mydomain.com**, the DNS will reply back with an IP
-- That IP can be used by our web browser to get to our correct server and then get the HTTP response from our server. At a very high level this is how th DNS works
+- That IP can be used by our web browser to get to our correct server and then get the HTTP response from our server. At a very high level this is how the DNS works
 
 ![Route 53](./images/../../images/Route_53.png)
 
@@ -107,23 +107,23 @@ Need to know them at a high-level for the Cloud Practitioner Exam
 
   ![SIMPLE ROUTING POLICY](../images/Simple_Routing_Policy.PNG)
 
-- Has no health checks
-- Our web browser will go into our DNS system, does a DNS query and gets an IPv5 as a result
+- Has **no health checks**
+- Our web browser will go into our DNS system, does a DNS query and gets an IPv4 as a result
 
 ### Weighted Routing Policy
 
   ![WEIGHTED ROUTING POLICY](../images/Weighted_Routing_Policy.PNG)
 
 - Allows us to distribute the traffic across multiple EC2 instances
-- In this example, we have to assig weights to your EC2 instances. For ex, 70, 20 and 10
-- Then DNS will make sure that our clients send 70% of traffic onto the first EC instance, 20% to the second instance and 10% to the third instance. This is effectively some kind of load balancing. In this, we use health checks
+- In this example, you have to assign weights to your EC2 instances. For ex, 70%, 20% and 10%
+- Then DNS will make sure that our clients send 70% of traffic onto the first EC2 instance, 20% to the second EC2 instance and 10% to the third EC2 instance. This is effectively some kind of load balancing. In this, **we use health checks**
 
 ### Latency Routing Policy
 
   ![LATENCY ROUTING POLICY](../images/Latency_Routing_Policy.PNG)
 
 - Say, we are displaying our application globally, one in California and the other one is Australia and our users are all around the world
-- In latency routing policy, we look at where the user is located and if they are located close to our American EC2 instance then they will be redirected to talk to that server, If they are close to Australia then they will be redircted to talk to the Australia server
+- In latency routing policy, we look at where the user is located and if they are located close to our American EC2 instance, then they will be redirected to talk to that server, If they are close to Australia, then they will be redircted to talk to the Australia server
 - In this example, Route53 will be used to minimize the latency between the users and servers by making the users connect to the server that is the closest to them
 
 ### Failover Routing Policy
@@ -138,14 +138,14 @@ Need to know them at a high-level for the Cloud Practitioner Exam
 
 - CloudFront is the Content Delivery Network (CDN)
 - **Improves read performance of your website by caching the content at different edge locations**
-- Because your content is cached all around the world then your users all around the world will have a lower latency therby improving  user experience
+- Because your content is cached all around the world then your users all around the world will have a lower latency thereby improving  user experience
 - CloudFront is made of **216 Points of Presence** globally which corresponds to edge locations around the world, and AWS keeps on adding locations to improve user experience even further everywhere
-- By having the content distributed globally, we are getting a DDoS protection (an attack where all your servers around the world are getting attacked at the same time) because your application is worldwide then you are protected against these attacks, also using something called Shield, andd AWS Web Application Firewall
+- By having the content distributed globally, we are getting a DDoS protection (an attack where all your servers around the world are getting attacked at the same time) because your application is worldwide then you are protected against these attacks, also using something called **Shield**, and **AWS Web Application Firewall**
 - Source: <https://aws.amazon.com/cloudfront/features/?nc=sn&loc=2>
 
   ![AMAZON CLOUDFRONT](../images/Amazon_CloudFront.PNG)
 
-- Example - If you see the World Map and we see some edge locations as well as edge caches. Say, we had created an S3 bucket and website on our S3 bucket in Australia, but we had a user may be in the US of A, then if the user requests the content from a American Edge location using CloudFront, and CloudFront will be able to fetch the content from Australia. Now, if another user in the US of A requests the same content, then it will be served directly from the edge without going all the way to Australia to serve that content. Same holds true for an user in China, it will talk to a Chinese Point of Presence, which is redirected to the S3 buckets in Australia, later the content will be cached at the Chinese edge location for other user requests
+- Example - If you see this World Map, you see some edge locations as well as edge caches. Say, you had created an S3 bucket and website on our S3 bucket in Australia, but you had a user may be in the USA, then if the user requests the content from a American Edge location using CloudFront, and CloudFront will be able to fetch the content from Australia. Now, if another user in the USA requests the same content, then it will be served directly from the edge without going all the way to Australia to serve that content. Same holds true for an user in China, it will talk to a Chinese Point of Presence, which is redirected to the S3 buckets in Australia, later the content will be cached at the Chinese edge location for other user requests
 
 ### CloudFront - Origins
 
@@ -155,7 +155,7 @@ CloudFront has several types of origins, which are basically backends you want t
   - For uploading files to S3 directly through CloudFront. Here CloudFront can be used as an ingress
   - The connection between S3 bucket and CloudFront is enhanced with security using Origin Access Control (OAC)
 - **VPC Origin**
-  - We can connect CloudFront directly to the applications hosted in VPC private subnets
+  - You can connect CloudFront directly to the applications hosted in VPC private subnets
   - You can connect CloudFront directly to Application Load Balancer / Network Load Balancer / EC2 Instances privately
 - **Custom Origin (anything that uses HTTP can be used in the backend)**
   - An S3 website (must first enable the bucket as a static S3 website)
@@ -165,7 +165,7 @@ CloudFront has several types of origins, which are basically backends you want t
 
   ![CLOUDFRONT AT A HIGH LEVEL](../images/CloudFront_At_A_Highlevel.PNG)
 
-- We have Edge Locations all around the world and then it will be connecting to your origin. Would it be an S3 bucket, or an HTTP server?
+- We have Edge Locations all around the world and then it will be connecting to your origin. It could be an S3 bucket, or an HTTP server
 - When the client connects and does an HTTP request into your edge location, then the edge location will see if it has it in the cache. If it doesn't, then it will go to the origin to the get the request results. And then once it retrieves the results, it will be caching it into a local cache, so that if another client requests the same content from the same Edge Location, then the Edge Location does not need to go to the origin
 
 ### CloudFront - S3 as an origin
@@ -191,7 +191,7 @@ CloudFront has several types of origins, which are basically backends you want t
   ![S3 TRANSFER ACCELERATION](../images/S3_Transfer_Acceleration.PNG)
 
 - Increase transfer speed by transferring file to an AWS edge location which will forward the data to the S3 bucket in the target region
-- In the above example, if we try to upload a file from the US of A into an S3 bucket in Australia, first it will try to upload the file into the nearest edge lcoation to a user in the US of A. Later using the internal AWS network, the Edge Location will transfer the file to the S3 buckets in Australia resulting in a more reliable and fast connection. This is the basics of how S3 Transfer Acceleration works and this is only used when you want to upload or download a file from S3 bucket that is far away from you
+- In the above example, if we try to upload a file from the USA into an S3 bucket in Australia, first it will try to upload the file into the nearest edge location to a user in the USA. Later using the internal AWS network, the Edge Location will transfer the file to the S3 buckets in Australia resulting in a more reliable and fast connection. This is the basics of how S3 Transfer Acceleration works and this is only used when you want to upload or download a file from S3 bucket that is far away from you
 - Test the tool at: <https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html>
 
 ## AWS Global Accelerator
@@ -205,7 +205,7 @@ CloudFront has several types of origins, which are basically backends you want t
 - In the above example, say we have deployed an ALB in India and users all around the world want to access our application
 - Using Global Accelerator, users connect to an edge location and the edge location will route the traffic directly into India
 - Benefit we get out of this is the traffic on the public internet only happens between America and the closest edge location and then it leverages the private AWS network to speed up the connection from the edge location to your ALB. This is same for Europe, Australia and to the rest of the world 
-- On top of it, you only access your application through 2 static IPs called Anycast IPs. Using Anycast IP you will be redirected automatically tot he correct edge location. Then the edge location will send the traffic to your application
+- On top of it, you only access your application through 2 static IPs called Anycast IPs. Using Anycast IP, you will be redirected automatically to the correct edge location. Then the edge location will send the traffic to your application
 - Test the tool at: <https://speedtest.globalaccelerator.aws/#/>
 - Here is a diagram which shows what happens with and without a Global Acclerator
 
@@ -240,8 +240,8 @@ CloudFront has several types of origins, which are basically backends you want t
 - So two different skillsets, two different types of APIs, and that may be complicated
 - AWS recognized that some companies run a hybrid cloud therefore they came up with **AWS Outposts**
 - **AWS Outposts are "server racks"** that offers the same AWS infrastructure, services, APIs & tools to build your own applications on-premises just as in the cloud
-- **AWS will come and setup and manage "Outposts Racks"** which are servers within your on-premises infrastructure. These servers come preloaded with the AWS services but you can benefit them from on-premises
-- On your corporate data centesr you will have your Outpost racks directly set up by AWS and this allows you to extend your AWS services directly onto your on-premises data centers which is revolutionary
+- **AWS will come and setup and manage "Outposts Racks"** which are servers within your on-premises infrastructure. These servers come preloaded with the AWS services, but you can benefit them from on-premises
+- On your corporate data centers, you will have your Outpost racks directly set up by AWS and this allows you to extend your AWS services directly onto your on-premises data centers which is revolutionary
 - But the difference between an EC2 instance running on the cloud and an EC2 instance running in your own data center is that now you are responsible for the Outposts Rack physical security
 
 ### AWS Outposts Benefits
@@ -249,7 +249,7 @@ CloudFront has several types of origins, which are basically backends you want t
 - Low-latency access to on-premises systems
 - Local data processing - data may never leave your on-premise system and never go to the cloud
 - Data residency
-- Easier migration from on-premises to AWS Outpose and then to the cloud
+- Easier migration from on-premises to AWS Outpost, and then to the cloud
 - Fully managed service - AWS manages these servers for you
 - Some services that work on Outposts:
   - EC2
@@ -285,7 +285,7 @@ CloudFront has several types of origins, which are basically backends you want t
   
   ![AWS LOCAL ZONES](../images/AWS_Local_Zones.PNG)
 
-  - How does the above example work? You have region us-east-1 with 2 AZs but it is possiblee for you to define a local zone in Boston and then extend your VPC to be going across these AZs and local zones. Then you will be able to launch an EC2 instance into this local zone
+  - How does the above example work? You have region us-east-1 with 2 AZs but it is possible for you to define a local zone in Boston and then extend your VPC to be going across these AZs and local zones. Then you will be able to launch an EC2 instance into this local zone
   - That means if you knew that you had users in Boston and we really, really want them to have low-latency access to our applications directly from Boston, then we can enable the local zone in Boston. Once you enable, while creating an EC2 instance we can choose the subnet in VPC. For the AZ, we will be able to choose the Boston subnet and then associate that with the local zone. This would extend the VPC to local zone and therefore deploy EC2 instances closer to your users
 
 ## Gloabl Applications Architecture
@@ -305,18 +305,18 @@ CloudFront has several types of origins, which are basically backends you want t
   ![GLOBAL APPLICATION MULTI REGION](../images/Global_Application_Architecture_Multi_Region_AZ.PNG)
 
 - **Multi Region, Active-Passive:**
-  - active-passive means that we have two regions where each region has one or multiple AZ
-  - in one region our EC2 instances are going to be active meaning, our users where ever they are in the world will be able to read and write to our EC2 instance in active region
-  - other EC2 instance is passive that means there is data replication between the active region and the passive region.
-  - possibly the users can do reads from the passive region, but cannot write to the passive region
-  - With this we will have imprived read latency
-  - However all the writes still need to go to the same central region and will have high latency
-  - With multiple regions it is an increased difficulty to setup 
+  - Active-Passive means that we have two regions where each region has one or multiple AZ
+  - In one region our EC2 instances are going to be active meaning, our users where ever they are in the world will be able to read and write to our EC2 instance in active region
+  - Other EC2 instance is passive that means there is data replication between the active region and the passive region.
+  - Possibly the users can do reads from the passive region, but cannot write to the passive region
+  - With this we will have improved read latency
+  - However, all the writes still need to go to the same central region and will have high latency
+  - With multiple regions it is an increased difficulty to setup
 
 - **Multi Region, Active-Active:**
-  - this is where each EC2 instance is able to take writes and reads. 
-  - There is replications still happening within these two instances which improves the read latency, the write latency at the global level
-  - It is very difficult to setup because now your application a lot of things in every single region
+  - This is where each EC2 instance is able to take writes and reads.
+  - There is replications still happening within these two instances which improves the read and the write latency at the global level
+  - It is very difficult to setup because now your application does a lot of things in every single region
 
 ## Global Applications - Summary
 
