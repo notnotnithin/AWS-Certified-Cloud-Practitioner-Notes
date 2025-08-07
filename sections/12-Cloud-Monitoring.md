@@ -42,7 +42,7 @@
 - **EC2 Instances:**
   - **CPU Utilization** - There are a ton more metrics we can look at. For example, for our EC2 instances, we can look at the CPU Utilization, which is how much we are making the CPU work and if it makes it work a lot, than maybe our instance is too busy and we need to scale it up or scale it out.
   - **Status Check** - The Status Check to make sure that our EC2 instance is properly functioning
-  - **Network (not RAM)** - the Network, to see how much network is going in our instance and out our instance. As you can see, the RAM is not an available metric for your EC2 instances
+  - **Network (not RAM)** - the Network, to see how much network is going in and out of your instance. As you can see, the RAM is not an available metric for your EC2 instances
   - By default these metrics are produced every 5 minutes
   - Option for Detailed Monitoring ($$$): more expensive to get these metrics every 1 minute
 - **EBS volumes**: Disk Read/Writes
@@ -83,20 +83,20 @@
 
   ![CLOUD WATCH LOGS FOR EC2](../images/CloudWatchLogs_EC2.PNG)
 
-- To summarize the diagram, the CloudWatch Logs service is running and your EC2 instance is running. You will install the CloudWatch Logs agent and this agent will send the log files directly into CloudWatch Logs. For this to work, we need to make sure that our EC2 instance has a proper instance role with the correct IAM permissions to send the log data into CloudWatch Logs. 
+- To summarize the diagram, the CloudWatch Logs service is running and your EC2 instance is running. You will install the CloudWatch Logs agent and this agent will send the log files directly into CloudWatch Logs. For this to work, we need to make sure that our EC2 instance has a proper EC2 instance role with the correct IAM permissions to send the log data into CloudWatch Logs. 
 - Then, **the CloudWatch log agent can also be setup on on-premises servers as well**, so this is a hybrid agent. It works both on-premises or on AWS and it allows you to collect logs from both your EC2 instances and your on-premises servers directly into the CloudWatch Log service
 
 ## Amazon EventBridge (formerly CloudWatch Events)
 
-- it used to be called CloudWatch Events. So if online, you see CloudWatch Events, think about Amazon EventBridge and vice versa, but Amazn EventBridge is the new name
-- Schedule: Cron jobs (scheduled scripts)
+- It used to be called CloudWatch Events. So if online, you see CloudWatch Events, think about Amazon EventBridge and vice versa, but Amazn EventBridge is the new name
+- **Schedule:** Cron jobs (scheduled scripts)
 
   ![EVENT BRIDGE CRON JOBS](../images/EventBridge_Cron_Jobs.PNG)
 
   - With EventBridge, you can react to events happening within your AWS accounts
   - And one use case for them is to schedule cron jobs. You want to have a script scheduled on a regular basis. For example, in EventBridge, you can create a rule that says that every one hour you should have an event created and that event will trigger a script running on a Lambda function. Effectively, you've done a serverless cron job
 
-- Event Pattern: Event rules to react to a service doing something
+- **Event Pattern:** Event rules to react to a service doing something
   
   ![EVENT BRIDGE EVENT PATTERN](../images/EventBridge_EventPattern.PNG)
 
@@ -127,8 +127,8 @@
 ## AWS CloudTrail
 
 - **CloudTrail is a service that provides governance, compliance and audit for your AWS Account**
-- Whenever you use an account, CloudTrail is enabled by default 
-- because CloudTrail will get an **history of all the API calls or events that happen within your AWS account**
+- Whenever you use an AWS account, CloudTrail is enabled by default 
+- Because CloudTrail will get an **history of all the API calls or events that happen within your AWS account**
   - If someone, for example, logs in the **console** then whatever they do will be logged in CloudTrail
   - If someone uses the **SDK**, it will be logged in CloudTrail
   - If someone does a command with the **CLI** it will again be logged with CloudTrail
@@ -166,27 +166,29 @@
 ### AWS X-Ray advantages
 
 - The X-Ray advantages is to So, the X-Ray advantages,
-  - is to do troubleshooting of the performance through the bottlenecks 
-  - or to understand the dependencies in a microservice architecture, because they're all connected as you saw in the previous graph
-  - We can pinpoint a service issue with tracing
-  - We can review a specific request behavior 
-  - find the errors and exceptions for that request
-  - We can know if we're meeting or not our service-level agreement, or SLA, meaning are we replying on time for all the requests 
-  - And if we're being throttled, if we're being slowed down, where is it happening, in which service? 
-  - And finally, what or which users are going to be impacted by these outages
+  - Is to do troubleshooting of the performance through the bottlenecks
+  - Or to understand the dependencies in a microservice architecture, because they're all connected as you saw in the previous graph
+  - You can pinpoint a service issue with tracing
+  - You can review a specific request behavior
+  - Find the errors and exceptions for that request
+  - You can know if you are meeting service-level agreement (SLA) or not. Meaning are we replying on time for all the requests
+  - If we're being throttled, if we're being slowed down, where is it happening, in which service?
+  - Finally, what or which users are going to be impacted by these outages
 - So, X-Ray really is great when you see, distributed tracing, troubleshooting, and you want to have a service graph
   
 ## Amazon CodeGuru
 
-- Amazon CodeGuru is a ML-powered service that will do two things. Number one is **automated code reviews**, and number two is **application performance recommendations**. 
-- When developers push outheir code, there is usually another developer that does a code review. 
+- Amazon CodeGuru is a ML-powered service that will do two things. 
+  - Number one is **automated code reviews**, and
+  - Number two is **application performance recommendations**
+- When developers push out their code, there is usually another developer that does a code review. 
 - Then when the code is deployed into production, you need to be able to monitor the performance of your code, and maybe you'll detect bugs by looking at the performance. CodeGuru does that in an automated fashion
 
   ![CODE GURU](../images/CodeGuru.PNG)
 
 - Provides two functionalities
-  - **CodeGuru Reviewer:** CodeGuru Reviewer is here to do automated code reviews with static code analysis (development). That means when you deploy your code onto a repository, for example, CodeCommit or GitHub,then the CodeGuru can have a look at all the lines of code and then can give you actionable recommendations in case it detects a bug or a memory leak or something that it has seen before. Because of this machine learning capability, it can detect bugs before even other reviewers detect them, which is very helpful
-  - **CodeGuru Profiler:** CodeGuru Profiler is going to be here to give you visibility/recommendations about your application performance during runtimes or in production. When you build and test your application, CodeGuru Profiler is already going to detect and optimize the expensive lines of code pre-production. And then when you deploy your application, you're going to measure your application in real time, and CodeGuru Profiler, yet again, is going to identify performance and cost improvements in production and give you these recommendations directly in your code
+  - **CodeGuru Reviewer:** CodeGuru Reviewer is here to do automated code reviews with static code analysis (development). That means when you deploy your code onto a repository, for example, CodeCommit or GitHub, then the CodeGuru can have a look at all the lines of code and then can give you actionable recommendations in case it detects a bug or a memory leak or something that it has seen before. Because of this machine learning capability, it can detect bugs before even other reviewers detect them, which is very helpful
+  - **CodeGuru Profiler:** CodeGuru Profiler is going to be here to give you visibility/recommendations about your application performance during runtimes or in production. When you build and test your application, CodeGuru Profiler is already going to detect and optimize the expensive lines of code in pre-production. And then when you deploy your application, you're going to measure your application in real time, and CodeGuru Profiler, yet again, is going to identify performance and cost improvements in production and give you these recommendations directly in your code
 
 ### Amazon CodeGuru Reviewer
 
