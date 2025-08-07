@@ -44,7 +44,7 @@
   - What we enable us to do is to have producers send messages into that queue
   - Then it could be one producer, but it could be as well, multiple producers
   - Then once the messages are stored in the queue, then they could be read by consumers who will be polling the queue, means requesting messages from the queue. It could be one consumer, or multiple consumers. 
-  - In this example, once the consumer poll messages they will share the work. Each consumer will get different messages and when they are done processing a message, for example, process a video, they will delete the message from the queue and it will be gone
+  - In this example, once the consumer poll messages they will share the work. **Each consumer will get different messages and when they are done processing a message, for example, process a video, they will delete the message from the queue and it will be gone**
   - In this mechanism, we have the producers sending messages into the queue, they are decoupled from the consumer reading the message from the queue and processing them at different speed
 - Oldest AWS offering (over 10 years old)
 - Fully managed service (~serverless), use to **decouple** applications
