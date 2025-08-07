@@ -136,10 +136,12 @@
 - **Manual Scaling**: Adjusting the number of instances manually based on load prediction
 - **Dynamic Scaling**: Automatically adjusts the number of instances based on demand (e.g., CPU usage)
   - **Simple / Step Scaling**
-    - When a CloudWatch alarm is triggered (example CPU > 70%), then add 2 units
-    - When a CloudWatch alarm is triggered (example CPU < 30%), then remove 1
+    - You define scaling actions based on thresholds.
+    - For example:
+      - When a CloudWatch alarm is triggered (example CPU > 70%), add 2 instances
+      - When a CloudWatch alarm is triggered (example CPU < 30%), remove 1 instance
   - **Target Tracking Scaling**
-    - Example: I want the average ASG CPU to stay at around 40%
+    - Example: I want the average ASG CPU to stay at around 40%. You define a target metric and ASG automatically scales iin/out to maintain that target 
   - **Scheduled Scaling**
     - Anticipate a scaling based on known usage patterns
     - Example: increase the min. capacity to 10 at 5 pm on Fridays
