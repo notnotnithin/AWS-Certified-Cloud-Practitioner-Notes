@@ -29,7 +29,7 @@
   - [AWS Security Hub](#aws-security-hub)
   - [Amazon Detective](#amazon-detective)
   - [AWS Abuse](#aws-abuse)
-  - [Root user privileges](#root-user-privileges)
+  - [Root User Privileges](#root-user-privileges)
   - [IAM Access Analyzer](#iam-access-analyzer)
   - [Summary](#summary)
 
@@ -53,7 +53,7 @@
   - Automated OS patching
   - Audit the underlying instance and disks & guarantee it functions
 - **Your responsibility:**
-  - Check the ports / IP / security group inbound rules in DB’s SG
+  - Check the ports / IP / security group inbound rules in DB’s Security Group
   - In-database user creation and permissions
   - Creating a database with or without public access
   - Ensure parameter groups or DB is configured to only allow SSL connections
@@ -173,7 +173,7 @@
 - KMS = **AWS manages the encryption keys for us**
 - **Encryption Opt-in:**
   - EBS volumes: encrypt volumes
-  - S3 buckets: Server-side encryption of objects (SSE-S3 enabled by default, SSE-KMS opt in
+  - S3 buckets: Server-side encryption of objects (SSE-S3 enabled by default, SSE-KMS opt in)
   - Redshift database: encryption of data
   - RDS database: encryption of data
   - EFS drives: encryption of data
@@ -186,7 +186,7 @@
 
   ![SAMPLE CLOUD HSM DEVICE](../images/Sample_CloudHSM_Device.PNG)
 
-- KMS => AWS manages the software for encryption
+- KMS => AWS manages the encryption software
 - CloudHSM => AWS provisions encryption **hardware**
 - Dedicated Hardware (HSM = Hardware Security Module)
 - You manage your own encryption keys entirely (not AWS)
@@ -198,14 +198,15 @@
 
 ## Types of KMS Keys
 
-- **Customer Managed CMK:**
+- **Customer Master Key (CMK)** - A master encryption key that you (the customer) create, manage, and control in AWS KMS
+- **Customer Managed Key:**
   - Create, manage and used by the customer, can enable or disable
   - Possibility of rotation policy (new key generated every year, old key preserved)
   - Possibility to bring-your-own-key
-- **AWS managed CMK:**
+- **AWS Managed Key:**
   - Created, managed and used on the customer’s behalf by AWS
   - Used by AWS services (aws/s3, aws/ebs, aws/redshift)
-- **AWS owned CMK:**
+- **AWS Owned Key:**
   - Collection of CMKs that an AWS service owns and manages to use in multiple accounts
   - AWS can use those to protect resources in your account (but you can’t view the keys)
 - **CloudHSM Keys (custom keystore):**
@@ -244,8 +245,13 @@
 
 ## AWS GuardDuty
 
-- Intelligent Threat discovery to protect your AWS Account
-- Uses Machine Learning algorithms, anomaly detection, 3rd party data
+- Intelligent threat detection service that continuously monitors your AWS accounts and workloads for malicious activity and unauthorized behavior
+- Imagine GuardDuty as a security guard for your AWS environment. It watches everything happening in your cloud - like who's logging in, what data is being accessed, and hether anything suspicious is going on
+- Uses Machine Learning algorithms, anomaly detection, 3rd party data to detect:
+  - Unusual API calls
+  - Unauthorized access
+  - Communication with known malicious IPs
+  - Compromised EC2 instances
 - One click to enable (30 days trial), no need to install software
   - Input data includes:
     - **CloudTrail Events Logs** – unusual API calls, unauthorized deployments
@@ -355,7 +361,7 @@
   - **Distributing malware** – AWS resources distributing software to harm computers or machines
 - Contact the AWS Abuse team: [AWS Abuse Form](https://aws.amazon.com/forms/report-abuse), or abuse@amazonaws.com
 
-## Root user privileges
+## Root User Privileges
 
 - Root user = Account Owner (created when the account is created)
 - Has complete access to all AWS services and resources
