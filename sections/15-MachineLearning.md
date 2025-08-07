@@ -67,7 +67,7 @@
 - Amazon Connect is a way to build a **virutal contact center**
 - It is a cloud-based virtual contact center that allows you to receive calls and creates contact flows
 - It can integrate with CRM systems or AWS services
-- The cool thing about Amazon Connect versus tradition offering is that there is no upfront payment. It is about 80% cheaper than traditional contact center solutions
+- The cool thing about Amazon Connect versus traditional offering is that there is no upfront payment. It is about 80% cheaper than traditional contact center solutions
 
   ![AMAZON CONNECT](../images/Amazon_Connect_Flow.PNG)
 
@@ -85,8 +85,8 @@
   - it can determines sentiment of the text
   - it can analyze text using tokenization and parts of speech
   - it can organize a collection of text files by topic
-- It is all about getting a lot of data in and Comprehend will do the rest to try and understand the meanign of that data
-- It takes text or unstructured data and structuring it around these features
+- It is all about getting a lot of data in and Comprehend will do the rest to try and understand the meaning of that data
+- It takes text or unstructured data and structures it around these features
 - **Key uses:**
   - Analyzing customer interactions - a bunch of customers sending you emails and you want to understand on an overall based on your support service what leads to a positive or negative experiences from your customers. Later you can have business insights to improve your business
   - Create and group articles by topics that Comprehend will uncover
@@ -102,7 +102,7 @@
 - Next, we are going to label the data. Meaning you need to say which columns corresponds to what, and also you need to give some kind of exam scores. Based on the data that I have gathered I can predict what the score will be
 - Next we need to build the machine learning model, which is how I can predict these scores from the historical data
 - Next you have to train the model and tune it and this is another part which is quite difficult to do, which is how to refine my model over time to better fit my data and my outputs
-- Now, after all the labeling, building, training and tuning you have a machine learning model which you need to use. This is called deploying machine learning models. We get new data coming in, for example, you are the new student, and you are going to survey asking questions. Based on the data coming in, I will apply the machine learning mdoel that I have created from before. The machine learning model will finally say, **"Based on the given data, I am going to predict that this student will pass with a score of 906"**. This whole process can be all done within SageMaker
+- Now, after all the labeling, building, training and tuning you have a machine learning model which you need to use. This is called deploying machine learning models. We get new data coming in, for example, you are the new student, and you are going to survey asking questions. Based on the data coming in, I will apply the machine learning model that I have created from before. The machine learning model will finally say, **"Based on the given data, I am going to predict that this student will pass with a score of 906"**. This whole process can be all done within SageMaker
 
 ## Amazon Kendra
 
@@ -126,7 +126,7 @@
   - Customized direct marketing
   - For example, a user has bought a lot of gardening tools, and you want to provide recommendations on the next one to buy based on a personalized service
 - Same technology **used by amazon.com** where after buying a few products you will start get recommended products as your potential next buy from the same category or from a completely different categories based on how you have been searching, buying, and user interests
-- Personalize is how you acces this from within AWS. You read your input data from Amazon S3 bucket, could be user interact data. Also you can use Amazon Personalize APi to have real-time data integration into the Amazon Personalize Service. This will then expose a customized personalized API for your websites and applications, you mobile applications, also you can send SMS or emails for personalization as well
+- Personalize is how you access this from within AWS. You read your input data from Amazon S3 bucket, could be user interact data. Also, you can use Amazon Personalize API to have real-time data integration into the Amazon Personalize Service. This will then expose a customized personalized API for your websites and applications, you mobile applications, also you can send SMS or emails for personalization as well
 - It takes days, not months, to build this model. You do not need to build, train and deploy ML solutions and use this bundled as is
 - Use Cases: retail stores, media and entertainment
 - From exam perspective, anytime you see an ML service to build recommendations and personalized recommendations, think of Amazon Personalize
