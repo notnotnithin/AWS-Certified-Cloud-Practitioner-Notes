@@ -39,7 +39,7 @@
   - When you create an EC2 instance, it gets a public IPv4 and what happens is you get a new public IP address every time you stop and start an EC2 instance (**default**)
   - **Private IPv4** – this can only be used on a private networks (LAN) such as internal AWS networking (e.g., 192.168.1.1)
   - Private IPv4 is fixed for EC2 Instances for lifetime even if you start/stop them
-- **Elastic IP** – allows you to attach a fixed public IPv4 address to EC2 instance. But if you leave the instance stopped for a long time, then this elastic IP is use for nothing
+- **Elastic IP** – allows you to attach a fixed public IPv4 address to EC2 instance. But if you leave the instance stopped for a long time, then this elastic IP is used for nothing
 - **Note: every single public IPv4 on AWS will be charged $0.005 per hour (including EIP)**
   - Free Tier: 750 hours usage per month
 - **IPv6 – Internet Protocol version 6 (3.4 × 10^38" Addresses)**
@@ -52,7 +52,7 @@
   ![SUBNETS PRIMER](../images/VPC_Subnets_Primer.PNG)
 
 - **VPC -Virtual Private Cloud:** private network to deploy your resources in and a VPC is linked to a specific region. So, if you have a multiple regions in AWS means you have multiple VPCs
-- Within a VPC, we have subnets. **Subnets** are part of your VPC and it allows you to partition your network inside your VPC. A VPC is associated with an Availability Zone
+- Within a VPC, we have subnets. **Subnets** are part of your VPC and it allows you to partition your network inside your VPC. A Subnet is associated with an Availability Zone
 - A **public subnet** is a subnet that is accessible from the internet
 - A **private subnet** is a subnet that is not accessible from the internet
 - To define access to the internet and access between the subnets, so that the resources can communicate, we need to use **Route Tables**
@@ -141,18 +141,18 @@
 - **VPC Endpoint Gateway:**
   - For example, we have a VPC, a private subnet and an EC2 instance in that private subnet and say we want to connect to Amazon S3 or DynamoDB. For this, you create a VPC Endpoint of type Gateway **(VPC Endpoint Gateway is for Amazon S3 & DynamoDB only)** and using this EC2 instance, you can connect through the gateway into Amazon S3 and DynamoDB, but privately.
 - **VPC Endpoint Interface:**
-  - The other type of endpoint you have is a **VPC Endpoint Interface** which is to connect to any other services on AWS including Amazon S3 & DynamoDB. For example, you wanted to push a custom metric onto CloudWatch from y ou EC2 instance. For this, we will have VPC Endpoint Interface and then the EC2 instance will connect to it to connect to CloudWatch
+  - The other type of endpoint you have is a **VPC Endpoint Interface** which is to connect to any other services on AWS including Amazon S3 & DynamoDB. For example, you wanted to push a custom metric from your EC2 instance onto CloudWatch. For this, we will have VPC Endpoint Interface then, the EC2 instance will connect to VPC Endpoint Interface to connect to CloudWatch
 
 ## AWS PrivateLink (Also from VPC Endpoint Services family)
 
 - Say, you have a service that you run within AWS, or say there is a vendor on the Marketplace, and they run a service on their own account within their own VPC. They want to expose a service to customers of AWS in a most secure and scalable way. To 1000s of VPCs, they need to have a private access to that service to establish a connectivity
 - You could use VPC peering, but that does not scale, and it is not very secure. What you want is something else and that something else is called a AWS PrivateLink
-- So PrivateLink allows you to connect a service running within your VPC to other VPCs directly and privately. It does not require VPC Peering or Internet Gateway, because it is on the private network, or NAT or Route Tables or anything like that
+- So PrivateLink allows you to connect a service running within your VPC to other VPCs directly and privately. It does not require VPC Peering or Internet Gateway, or NAT or Route Tables or anything like that because it is on the private network
 
   ![AWS PRIVATELINK](../images/AWS_PrivateLink.PNG)
 
 - Say, for example, you are talking to a vendor on the AWS Marketplace, and they run an application service in their own VPC which you want to use. You want to have an access to it from your own VPC, your own accounts with your own consumer application. In that case, you are going to ask your vendor to do a PrivateLink. On their end, they will have to create a Network Load Balancer (Service VPC) to expose that service. On your end, you will create an Elastic Network Interface (ENI - Customer VPC), then you will establish a PrivateLink between the two so that you have a private access to their Network Load Balancer and therefore to their service. 
-- All the internet traffic is actually not going to go through the public internet, but it is actually going to go through your private network. Therefore all communications will remain private and for eveery new customer that third party will need, all they will have to do is create a new PrivateLink for their customers, which is very easy to manage and way more scalable
+- All the internet traffic is actually not going to go through the public internet, but it is actually going to go through your private network. Therefore all communications will remain private and for every new customer that third party will need, all they will have to do is create a new PrivateLink for their customers, which is very easy to manage and way more scalable
 
 ## Site-to-Site VPN & Direct Connect
 
@@ -178,7 +178,7 @@
 
 - It is to connect your corporate data center to your VPC. For example, an EC2 instances running in your private subnet. To establish a Site-to-Site VPN, we need on-premises a **Customer Gateway (CGW)** (remember at the exam).
 - On the AWS side, you need a **Virtual Private Gateway (VGW)**
-- One the two things are provisioned and created, then you can connect them together using a Site-to-Site VPN. This is how a Site-to-Site VPN is implemented over the public internet
+- Once the two things are provisioned and created, then you can connect them together using a Site-to-Site VPN. This is how a Site-to-Site VPN is implemented over the public internet
 - **Going into the exam, Customer Gateway (CGW) and Virtual Private Gateway (VGW) are needed to establish a Site-to-Site VPN**
 
 ## AWS Client VPN
@@ -188,7 +188,7 @@
 
   ![CLIENT VPN](../images/AWS_Client_VPPN.PNG)
 
-- From the diagram, your VPC is right here and then your clien's VPN is installed on your computer
+- From the diagram, your VPC is right here and then your client's VPN is installed on your computer
 - You will establish the VPN connection over the **public internet**. Then you will be connected just as if you were connected privately into your VPC
 - And if your VPC is established a Site-to-Site VPN connection to your on-premises data center then your computer will also be able to access your servers privately on your on-premises data center. That's pretty magical, but that works
 
