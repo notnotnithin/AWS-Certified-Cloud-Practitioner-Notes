@@ -62,7 +62,7 @@
 ## Multi Account Strategies
 
 - You can have a Multi Account Strategy in AWS. That means that you wanna create accounts, for example, **per department**, **per cost center**, **per environment, for example, dev/test/and prod** based on **regulatory restrictions**. For example, if you don't want a service to be used in an account, you can use an SCP. Or if you want to **isolate the resources better**, you could have different VPC in different accounts. And it's also very good to have **separate per-account service limits** and also isolated accounts for **logging**. All these could be multi-account strategies, it's really up to each organization to choose what type of accounts they want
-- The idea is that you have two options, you can use Multi Account or One Account and Multiple VPC. That is a trade off, personally prefer Multi Account better
+- The idea is that you have two options, you can use Multi Account or One Account Multiple VPC. That is a trade off, personally prefer Multi Account better
 - You can use tagging standards across all the accounts for billing purposes
 - Enable CloudTrail on all accounts, send logs to central S3 account
 - Send CloudWatch Logs to central logging account
@@ -71,7 +71,7 @@
 
   ![OU EXAMPLE](../images/OU_Examples.PNG)
 
-- How can you organize your accounts? Well, you can organize them by Business Units, for example, with a Master Account. And then we have the Sales OU, we have the Retail OU and the Finance OU. And within each OU, so each Organizational Unit, you'll have multiple accounts or you can organize them by environment, production, development and tests. Or we can have them Project-based, for example, Project-1, Project-2, Project-3, or a mix of all these things
+- How can you organize your accounts? Well, you can organize them by Business Units, for example, with a Master Account and then, we have the Sales OU, Retail OU and the Finance OU. Within each OU, you will have multiple accounts or you can organize them by environment, production, development and tests. Or we can have them Project-based, for example, Project-1, Project-2, Project-3, or a mix of all these things
 
 ## AWS Organization
 
@@ -105,12 +105,12 @@
 
   ![AWS ORGANIZATION CONSOLIDATED BILLING](../images/AWS_Organization_Consolidated_Billing.PNG)
 
-  - Let's take an example, Reserved Instance Sharing. We have an organization with two accounts and in the first one, account A, there is no Reserved Instances, and account B, there are five reserved EC2 instances. Now, let's assume that we are within one AZ because Reserve Instances are at the AZ level and we have nine EC2 instances. As you can see, three are launched in account B, and six are launched in account A. Now, what is going to happen? Well, if we have five EC2 Reserved Instances on account B, then the three EC2 instances obviously are going to be reserved, but because we have enabled Reserved Instances sharing, then two instances in account A will also benefit from Reserved Instances pricing and therefore resulting in cost savings. At the end of the day, we have five Reserved Instances and four non-Reserved Instances in this use case even though Susan in account B only launched three EC2 instances out of the five that were reserved
+  - Let's take an example, Reserved Instance Sharing. We have an organization with two accounts and in the first one, account A, there is no Reserved Instances, and account B, there are five reserved EC2 instances. Now, let's assume that we are within one AZ because Reserved Instances are at the AZ level and we have nine EC2 instances. As you can see, three are launched in account B, and six are launched in account A. Now, what is going to happen? Well, if we have five EC2 Reserved Instances on account B, then the three EC2 instances obviously are going to be reserved, but because we have enabled Reserved Instances sharing, then two instances in account A will also benefit from Reserved Instances pricing and therefore resulting in cost savings. At the end of the day, we have five Reserved Instances and four non-Reserved Instances in this use case even though Susan in account B only launched three EC2 instances out of the five that were reserved
 - Finally, the Reserved Instances discount sharing can be turned off for any accounts in the organization, including the management accounts, the main accounts of your organization
 
 ## AWS Control Tower
 
-- It is for you an easy way to **set up and govern a secure and compliant, multi account, AWS environment** based on best practices.Instead of doing everything manually creating an organization and so on and then applying security practices, we have Control Tower where you can, with a few clicks, creates a multi account, AWS environment
+- It is for you an easy way to **set up and govern a secure and compliant, multi account, AWS environment** based on best practices. Instead of doing everything manually creating an organization and so on and then applying security practices, we have Control Tower where you can, with a few clicks, creates a multi account, AWS environment
 - The benefits is that:
   - You can automate the setup of your environments in a few clicks
   - You can automate ongoing policy management using guardrails
@@ -265,8 +265,8 @@
 
 - Use Private IP instead of Public IP for good savings and better network performance
 - Use same AZ for maximum savings (at the cost of high availability)
-- Through internet it will be costly between 2 Ec2 instance between 2 Availability Zones
-- Recommended to use a private IP between 2 Availability Zones.
+- Through internet it will be costly between two EC2 instance between two Availability Zones
+- Recommended to use a private IP between two Availability Zones
 - Inter region will be costlier
 
 ## Savings Plan
@@ -365,7 +365,7 @@
 - The AWS Cost & Usage Report lists AWS usage for each service category used by an account and its IAM users in hourly or daily line items, as well as any tags that you have activated for cost allocation purposes.
 - Can be integrated with Athena, Redshift or QuickSight
 
-  !COST AND USAGE REPORTS](../images/Cost_And_Usage_Reports.PNG)
+  ![COST AND USAGE REPORTS](../images/Cost_And_Usage_Reports.PNG)
 
 ## Cost Explorer
 
