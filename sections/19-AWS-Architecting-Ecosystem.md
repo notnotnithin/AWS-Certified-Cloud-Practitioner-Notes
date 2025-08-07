@@ -46,7 +46,7 @@
 - **Disposable Resources**: Servers should be disposable and easily configured. If you put too much configuration onto a server and somehow that server loses its resource, and you need three days to reconfigure that server back, then you haven't done things properly
 - **Automation**: Guided by principles like serverless, infrastructure as a service, auto-scaling and so on
 - **Loose Coupling**: 
-  - Break monolithic applications into smaller
+  - Break monolithic applications into smaller parts
   - Loosely coupled components 
   - A change or a failure in one component should not cascade to other components
 - **Services, Not Servers**: 
@@ -63,7 +63,7 @@
   - Cost Optimization
   - Sustainability
 - The idea is that acting with these 6 pillars you are having good architecture on AWS
-- They are not something you balance and compromise between them or trade offs, they are actually a synergy. For example, when you prove your operational excellence you are probably also improving your cost optimization
+- They are not something you balance and compromise between them or trade off, they are actually a synergy. For example, when you prove your operational excellence you are probably also improving your cost optimization
 
 ### 1. Operational Excellence
 
@@ -82,7 +82,7 @@
 - It includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies. Once you have security in place, you are really minimizing a risk over time and you save cost from disasters and you really don't want to have a risk, or a security issue in your company
 - **Design Principles**:
   - **Implement a strong identity foundation** - You may want to centralize how you manage your accounts, you may want to rely on priniciple of least privilege and IAM is one the services to help you do that
-  - **We want to enable traceability** - that means we need to look into all the logs, all the metrics and store them and automatically respond and take action every time something loks really weird
+  - **We want to enable traceability** - that means we need to look into all the logs, all the metrics and store them and automatically respond and take action every time something looks really weird
   - **Apply security at all layers** - like edge network, VPC, subnet, load balancer, every instance you ever have, OS, application
   - **Automate security best practices** - it is mostly done well, when it is automated
   - **Protect data in transit and at rest** - Means always enable encryption, always do SSL, always use tokenization, and do access control to keep people away from data. Why is someone requesting data? Isn't that risk when you allow someone to access data, do they really need it or is there a way to automate the need for that direct access and that manual processing of data
