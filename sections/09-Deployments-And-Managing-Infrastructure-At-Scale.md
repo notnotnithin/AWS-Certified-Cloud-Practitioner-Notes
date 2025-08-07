@@ -166,10 +166,10 @@ AWS Elastic Beanstalk uses AWS CloudFormation underneath for managing the infras
 
 ### Elastic Beanstalk - Health Monitoring
 
-![Health Monitor-1](Beanstalk_HealthMonitor-1.png)
-![Health Monitor-2](Beanstalk_HealthMonitor-2.png)
-![Health Monitor-3](Beanstalk_HealthMonitor-3.png)
-![Health Monitor-4](Beanstalk_HealthMonitor-4.png)
+![Health Monitor-1](../images/Beanstalk_HealthMonitor-1.PNG)
+![Health Monitor-2](../images/Beanstalk_HealthMonitor-2.PNG)
+![Health Monitor-3](../images/Beanstalk_HealthMonitor-3.PNG)
+![Health Monitor-4](../images/Beanstalk_HealthMonitor-4.PNG)
 
 - Beanstalk has a full monitoring suite available within the service itself
 - Health agents available on each EC2 instance within Beanstalk and that is going to push metrics to CloudWatch
